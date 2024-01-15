@@ -66,7 +66,7 @@ public class IndexUtil {
     }
 
     public static boolean isIndexable(BetaNodeFieldConstraint constraint, short nodeType, RuleBaseConfiguration config) {
-        return constraint instanceof IndexableConstraint && ((IndexableConstraint)constraint).isIndexable(nodeType, config);
+        return constraint instanceof IndexableConstraint && ((IndexableConstraint)constraint).isIndexable(nodeType, config) && !isBigDecimalEqualityConstraint((IndexableConstraint)constraint);
     }
 
     private static boolean canHaveRangeIndex(short nodeType, IndexableConstraint constraint, RuleBaseConfiguration config) {
