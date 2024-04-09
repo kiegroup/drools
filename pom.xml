@@ -12,7 +12,7 @@
   <groupId>org.kie</groupId>
   <artifactId>drools-parent</artifactId>
   <packaging>pom</packaging>
-  <version>9.99.0</version>
+  <version>9.99.1</version>
 
   <name>Drools :: Parent</name>
   <description>
