@@ -11,10 +11,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  on-success:
+  sync-main:
     #TODO: uncomment this
     #if: github.repository_owner == 'kiegroup'
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     name: Sync main with main-apache branch
     runs-on: ubuntu-latest
  
@@ -47,6 +46,7 @@ jobs:
       - name: Merge main-apache branch excluding white-listed paths
         id: merge
         run: |
+          set -x
           git merge --no-commit origin/main-apache || true
           git reset origin/main ${{vars.MAIN_SYNC_WORKFLOW_EXCLUDE_PATHS}}
           if git diff --cached --quiet; then
