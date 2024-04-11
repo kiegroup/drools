@@ -12,8 +12,7 @@ on:
 
 jobs:
   sync-main:
-    #TODO: uncomment this
-    #if: github.repository_owner == 'kiegroup'
+    if: github.repository_owner == 'kiegroup'
     name: Sync main with main-apache branch
     runs-on: ubuntu-latest
  
