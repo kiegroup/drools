@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Generate PR ID
         id: generate_pr_id
-        run: echo "pr_id=$(date +'%Y%m%d-%H%M')" >> $GITHUB_OUTPUT
+        run: echo "pr_id=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
       - name: Checkout repository
         uses: actions/checkout@v4
