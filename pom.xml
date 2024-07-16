@@ -24,7 +24,7 @@
     <surefire.forkCount>1</surefire.forkCount>
     <alphanetworkCompilerEnabled>false</alphanetworkCompilerEnabled>
            
-    <sonar.projectKey>kiegroup_drools:${project.groupId}:${project.artifactId}</sonar.projectKey>
+    <sonar.projectKey>kiegroup_drools</sonar.projectKey>
   </properties>
 
   <repositories>
