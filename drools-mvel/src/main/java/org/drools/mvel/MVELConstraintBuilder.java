@@ -256,7 +256,7 @@ public class MVELConstraintBuilder implements ConstraintBuilder {
         return expr;
     }
 
-    protected static String resolveUnificationAmbiguity(Declaration[] declrations, String leftValue, String rightValue) {
+    private static String resolveUnificationAmbiguity(Declaration[] declrations, String leftValue, String rightValue) {
         // resolve ambiguity between variable and bound value with the same name in unifications
         rightValue = rightValue + "__";
         for (Declaration declaration : declrations) {
