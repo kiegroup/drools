@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.drools.core.common.InternalKnowledgeRuntime;
+import org.drools.core.event.rule.impl.ProcessDataChangedEventImpl;
 import org.kie.api.event.process.MessageEvent;
 import org.kie.api.event.process.ProcessCompletedEvent;
 import org.kie.api.event.process.ProcessEventListener;
@@ -29,6 +30,7 @@ import org.kie.api.event.process.ProcessNodeTriggeredEvent;
 import org.kie.api.event.process.ProcessStartedEvent;
 import org.kie.api.event.process.ProcessVariableChangedEvent;
 import org.kie.api.event.process.SLAViolatedEvent;
+import org.kie.api.event.process.ProcessDataChangedEvent;
 import org.kie.api.event.process.SignalEvent;
 import org.kie.api.runtime.KieRuntime;
 import org.kie.api.runtime.process.NodeInstance;
@@ -176,6 +178,13 @@ public class ProcessEventSupport extends AbstractEventSupport<ProcessEventListen
             final MessageEvent event = new MessageEventImpl(instance, kruntime, nodeInstance, messageName,
                     messageObject);
             notifyAllListeners(event, ProcessEventListener::onMessage);
+        }
+    }
+
+    public void fireAfterProcessDataChanged(final ProcessInstance instance, KieRuntime kruntime) {
+        if ( hasListeners() ) {
+            final ProcessDataChangedEvent event = new ProcessDataChangedEventImpl(instance, kruntime);
+            notifyAllListeners( event, ( l, e ) -> l.onProcessDataChangedEvent( e ) );
         }
     }
 
