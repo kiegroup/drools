@@ -16,12 +16,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.gwt.plugin.version>2.9.0</maven.gwt.plugin.version>
     <it.tests>**/*IT.java</it.tests>
     <!-- Version 2.0.1.Final which is coming from kie-parent is not compatible with validation components -->
     <version.javax.validation>1.0.0.GA</version.javax.validation>
-    <!-- ERRAI webapp compatible -->
-    <version.com.google.guava>29.0-jre</version.com.google.guava>
   </properties>
 
   <dependencies>
@@ -104,12 +101,12 @@
 
     <!-- GWT -->
     <dependency>
-      <groupId>com.google.gwt</groupId>
+      <groupId>org.gwtproject</groupId>
       <artifactId>gwt-dev</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.google.gwt</groupId>
+      <groupId>org.gwtproject</groupId>
       <artifactId>gwt-user</artifactId>
       <scope>provided</scope>
     </dependency>
@@ -190,7 +187,6 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
-        <version>${maven.gwt.plugin.version}</version>
         <configuration>
           <runTarget>index.html</runTarget>
           <extraJvmArgs>-Xmx1g -Xms756m -XX:CompileThreshold=1000</extraJvmArgs>
