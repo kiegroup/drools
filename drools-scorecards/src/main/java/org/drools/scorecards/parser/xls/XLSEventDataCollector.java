@@ -16,7 +16,7 @@
 
 package org.drools.scorecards.parser.xls;
 
-import org.apache.poi.hssf.util.CellReference;
+import org.apache.poi.ss.util.CellReference;
 import org.dmg.pmml.pmml_4_2.descr.*;
 import org.drools.core.util.StringUtils;
 import org.kie.pmml.pmml_4_2.extensions.PMMLExtensionNames;
@@ -52,7 +52,7 @@ class XLSEventDataCollector {
 
     private void fulfillExpectation(int currentRowCtr, int currentColCtr, Object cellValue, Class expectedClass) throws ScorecardParseException {
         List<DataExpectation> dataExpectations = resolveExpectations(currentRowCtr, currentColCtr);
-        CellReference cellRef = new CellReference(currentRowCtr, currentColCtr);
+        CellReference cellRef = new CellReference(currentRowCtr, currentColCtr,true,true);
         Method method = null;
         for (DataExpectation dataExpectation : dataExpectations) {
             try {
