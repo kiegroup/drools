@@ -26,7 +26,7 @@
   <parent>
     <groupId>org.kie</groupId>
     <artifactId>drools-build-parent</artifactId>
-    <version>999-SNAPSHOT</version>
+    <version>9.104.0</version>
     <relativePath>../build-parent/pom.xml</relativePath>
   </parent>
 
@@ -42,7 +42,6 @@
     <module>drools-impact-analysis-model</module>
     <module>drools-impact-analysis-parser</module>
     <module>drools-impact-analysis-graph</module>
-    <module>drools-impact-analysis-itests</module>
   </modules>
 
 </project>
