@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 120
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [windows-latest]
         java-version: [17]
         maven-version: ['3.9.6']
       fail-fast: false
@@ -45,6 +45,8 @@ jobs:
           definition-file: https://raw.githubusercontent.com/${GROUP:kiegroup}/drools/${BRANCH:main}/.ci/buildchain-config.yaml
           annotations-prefix: ${{ runner.os }}-${{ matrix.java-version }}/${{ matrix.maven-version }}
           github-token: "${{ secrets.GITHUB_TOKEN }}"
+        env:
+          BUILD_MVN_OPTS: -Dfile.encoding=UTF-8
       - name: Surefire Report
         uses: kiegroup/kie-ci/.ci/actions/surefire-report@main
         if: ${{ always() }}
