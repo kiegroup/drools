@@ -8,6 +8,7 @@ env:
 
 jobs:
   compute-targets:
+    if: false
     if: ${{ github.event.pull_request.state == 'closed' && github.event.pull_request.merged }}
     runs-on: ubuntu-latest
     outputs:
@@ -22,6 +23,7 @@ jobs:
           labels: ${LABELS}
   
   backporting:
+    if: false
     if: ${{ github.event.pull_request.state == 'closed' && github.event.pull_request.merged && needs.compute-targets.outputs.target-branches != '[]' }}
     name: "[${{ matrix.target-branch }}] - Backporting"
     runs-on: ubuntu-latest
