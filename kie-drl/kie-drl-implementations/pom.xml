@@ -27,7 +27,7 @@
     <parent>
         <artifactId>kie-drl</artifactId>
         <groupId>org.kie</groupId>
-        <version>9.103.0</version>
+        <version>9.103.1</version>
     </parent>
 
     <name>KIE :: DRL :: Implementations</name>
