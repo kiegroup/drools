@@ -1,22 +1,26 @@
 name: Sync main branch
 
-env:
-  GITHUB_TOKEN: ${{ secrets.APACHE_SYNC_MIDSTREAM_TOKEN }}
-
 on:
   schedule:
     - cron:  '0 1 * * 0' 
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   sync-main:
-    if: github.repository_owner == 'kiegroup'
+    # if: github.repository_owner == 'kiegroup'
     name: Sync main branch
     runs-on: ubuntu-latest
 
     steps:
       - name: Create a PR to sync main branch with main-apache
-        uses: kiegroup/kie-ci/.ci/actions/main-sync@main
+        uses: fantonangeli/kie-ci/.ci/actions/main-sync@SRVLOGIC-633-Fix-token-issues-and-redesign-of-upstream-sync-CI
         with:
           main_sync_workflow_exclude_paths: ${{ vars.MAIN_SYNC_WORKFLOW_EXCLUDE_PATHS }}
           main_sync_workflow_pr_reviewers: ${{ vars.MAIN_SYNC_WORKFLOW_PR_REVIEWERS }}
+          upstream_remote: https://github.com/apache/incubator-kie-drools.git
+          dry_run: true
+          github_token: ${{ secrets.APACHE_SYNC_MIDSTREAM_TOKEN }}
