@@ -18,7 +18,20 @@
  */
 package org.kie.dmn.model.v1_4;
 
-import org.kie.dmn.model.impl.AbstractTBusinessContextElement;
+import org.kie.dmn.model.api.BusinessContextElement;
 
-public class TBusinessContextElement extends AbstractTBusinessContextElement implements URIFEELed {
+public class TBusinessContextElement extends TNamedElement implements BusinessContextElement {
+
+    protected String uri;
+
+    @Override
+    public String getURI() {
+        return uri;
+    }
+
+    @Override
+    public void setURI(String value) {
+        this.uri = value;
+    }
+
 }

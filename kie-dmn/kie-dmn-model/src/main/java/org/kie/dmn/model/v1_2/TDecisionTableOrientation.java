@@ -16,32 +16,30 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.kie.dmn.model.impl;
+package org.kie.dmn.model.v1_2;
 
-import org.kie.dmn.model.api.Group;
+public enum TDecisionTableOrientation {
 
-public abstract class AbstractTGroup extends AbstractTArtifact implements Group {
+    RULE_AS_ROW("Rule-as-Row"),
+    RULE_AS_COLUMN("Rule-as-Column"),
+    CROSS_TABLE("CrossTable");
+    private final String value;
 
-    protected String name;
-
-    @Override
-    public String getName() {
-        return name;
+    TDecisionTableOrientation(String v) {
+        value = v;
     }
 
-    @Override
-    public void setName(String value) {
-        this.name = value;
+    public String value() {
+        return value;
     }
 
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(String value) {
-        this.id = value;
+    public static TDecisionTableOrientation fromValue(String v) {
+        for (TDecisionTableOrientation c: TDecisionTableOrientation.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
     }
 
 }

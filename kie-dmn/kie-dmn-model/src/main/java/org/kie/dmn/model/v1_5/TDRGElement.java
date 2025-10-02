@@ -18,9 +18,9 @@
  */
 package org.kie.dmn.model.v1_5;
 
-import org.kie.dmn.model.impl.AbstractTDRGElement;
+import org.kie.dmn.model.api.DRGElement;
 
-public class TDRGElement extends AbstractTDRGElement implements URIFEELed {
+public class TDRGElement extends TNamedElement implements DRGElement {
 
 
 }

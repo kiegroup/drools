@@ -16,35 +16,30 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.kie.dmn.model.impl;
+package org.kie.dmn.model.v1_3;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.kie.dmn.model.api.Binding;
-import org.kie.dmn.model.api.Expression;
-import org.kie.dmn.model.api.Invocation;
+public enum TDecisionTableOrientation {
 
-public abstract class AbstractTInvocation extends AbstractTExpression implements Invocation {
+    RULE_AS_ROW("Rule-as-Row"),
+    RULE_AS_COLUMN("Rule-as-Column"),
+    CROSS_TABLE("CrossTable");
+    private final String value;
 
-    protected Expression expression;
-    protected List<Binding> binding;
-
-    @Override
-    public Expression getExpression() {
-        return expression;
+    TDecisionTableOrientation(String v) {
+        value = v;
     }
 
-    @Override
-    public void setExpression(Expression value) {
-        this.expression = value;
+    public String value() {
+        return value;
     }
 
-    @Override
-    public List<Binding> getBinding() {
-        if (binding == null) {
-            binding = new ArrayList<>();
+    public static TDecisionTableOrientation fromValue(String v) {
+        for (TDecisionTableOrientation c: TDecisionTableOrientation.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
         }
-        return this.binding;
+        throw new IllegalArgumentException(v);
     }
 
 }

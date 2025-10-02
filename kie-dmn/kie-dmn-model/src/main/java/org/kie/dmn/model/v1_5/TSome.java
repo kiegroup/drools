@@ -18,8 +18,8 @@
  */
 package org.kie.dmn.model.v1_5;
 
-import org.kie.dmn.model.impl.AbstractTSome;
+import org.kie.dmn.model.api.Some;
 
-public class TSome extends AbstractTSome implements URIFEELed {
+public class TSome extends TQuantified implements Some {
 
 }

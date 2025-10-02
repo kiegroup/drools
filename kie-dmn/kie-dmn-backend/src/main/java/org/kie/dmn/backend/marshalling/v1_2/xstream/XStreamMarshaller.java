@@ -18,6 +18,13 @@
  */
 package org.kie.dmn.backend.marshalling.v1_2.xstream;
 
+import java.io.Reader;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
@@ -29,12 +36,12 @@ import com.thoughtworks.xstream.io.xml.QNameMap;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 import com.thoughtworks.xstream.io.xml.StaxWriter;
 import com.thoughtworks.xstream.security.TypeHierarchyPermission;
-import java.util.List;
 import org.kie.dmn.api.marshalling.DMNExtensionRegister;
-import org.kie.dmn.backend.marshalling.AbstractXStreamMarshaller;
+import org.kie.dmn.api.marshalling.DMNMarshaller;
 import org.kie.dmn.backend.marshalling.CustomStaxReader;
 import org.kie.dmn.backend.marshalling.CustomStaxWriter;
 import org.kie.dmn.backend.marshalling.v1x.DMNXStream;
+import org.kie.dmn.model.api.DMNModelInstrumentedBase;
 import org.kie.dmn.model.api.Definitions;
 import org.kie.dmn.model.v1_2.KieDMNModelInstrumentedBase;
 import org.kie.dmn.model.v1_2.TArtifact;
@@ -88,9 +95,15 @@ import org.kie.dmn.model.v1_2.dmndi.DiagramElement;
 import org.kie.dmn.model.v1_2.dmndi.Dimension;
 import org.kie.dmn.model.v1_2.dmndi.Point;
 import org.kie.utll.xml.XStreamUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class XStreamMarshaller
-        extends AbstractXStreamMarshaller {
+        implements DMNMarshaller {
+
+    private static Logger logger = LoggerFactory.getLogger( XStreamMarshaller.class );
+    private List<DMNExtensionRegister> extensionRegisters = new ArrayList<>();
+
 
     private static StaxDriver staxDriver;
     static {
@@ -120,20 +133,63 @@ public class XStreamMarshaller
     }
 
     public XStreamMarshaller() {
-        super(staxDriver);
+
     }
 
-    public XStreamMarshaller(List<DMNExtensionRegister> extensionRegisters) {
-        super(staxDriver, extensionRegisters);
+    public XStreamMarshaller (List<DMNExtensionRegister> extensionRegisters) {
+        this.extensionRegisters.addAll(extensionRegisters);
+    }
+
+
+    @Override
+    public Definitions unmarshal(String xml) {
+        return unmarshal( new StringReader( xml ) );
     }
 
     @Override
-    protected boolean isURIDMNEquals(String value) {
-        return KieDMNModelInstrumentedBase.URI_DMN.equals(value);
+    public Definitions unmarshal(Reader isr) {
+        try {
+            XStream xStream = newXStream();
+
+            Definitions def = (Definitions) xStream.fromXML( isr );
+
+            return def;
+        } catch ( Exception e ) {
+            logger.error( "Error unmarshalling DMN model from reader.", e );
+        }
+        return null;
     }
 
     @Override
-    protected XStream newXStream() {
+    public String marshal(Object o) {
+        try ( Writer writer = new StringWriter();
+              CustomStaxWriter hsWriter = (CustomStaxWriter) staxDriver.createWriter(writer); ) {
+            XStream xStream = newXStream();
+            if ( o instanceof DMNModelInstrumentedBase ) {
+                KieDMNModelInstrumentedBase base = (KieDMNModelInstrumentedBase) o;
+                String dmnPrefix = base.getNsContext().entrySet().stream().filter(kv -> KieDMNModelInstrumentedBase.URI_DMN.equals(kv.getValue())).findFirst().map(Map.Entry::getKey).orElse("");
+                hsWriter.getQNameMap().setDefaultPrefix( dmnPrefix );
+            }
+            extensionRegisters.forEach( r -> r.beforeMarshal(o, hsWriter.getQNameMap()) );
+            xStream.marshal(o, hsWriter);
+            hsWriter.flush();
+            return writer.toString();
+        } catch ( Exception e ) {
+            logger.error( "Error marshalling DMN model to XML.", e );
+        }
+        return null;
+    }
+
+    @Override
+    public void marshal(Object o, Writer out) {
+        try {
+            out.write( marshal( o ) );
+        } catch ( Exception e ) {
+            logger.error( "Error marshalling DMN model to XML.", e );
+        }
+    }
+
+    private XStream newXStream() {
         XStream xStream = XStreamUtils.createNonTrustingXStream(staxDriver, Definitions.class.getClassLoader(), DMNXStream::from);
         xStream.addPermission(new TypeHierarchyPermission(QName.class));
         xStream.addPermission(new TypeHierarchyPermission(KieDMNModelInstrumentedBase.class));

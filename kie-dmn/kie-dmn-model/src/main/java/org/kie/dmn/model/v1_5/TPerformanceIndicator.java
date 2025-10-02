@@ -18,8 +18,22 @@
  */
 package org.kie.dmn.model.v1_5;
 
-import org.kie.dmn.model.impl.AbstractTPerformanceIndicator;
+import org.kie.dmn.model.api.DMNElementReference;
+import org.kie.dmn.model.api.PerformanceIndicator;
 
-public class TPerformanceIndicator extends AbstractTPerformanceIndicator implements URIFEELed {
+import java.util.ArrayList;
+import java.util.List;
+
+public class TPerformanceIndicator extends TBusinessContextElement implements PerformanceIndicator {
+
+    protected List<DMNElementReference> impactingDecision;
+
+    @Override
+    public List<DMNElementReference> getImpactingDecision() {
+        if (impactingDecision == null) {
+            impactingDecision = new ArrayList<>();
+        }
+        return this.impactingDecision;
+    }
 
 }

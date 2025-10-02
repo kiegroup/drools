@@ -18,6 +18,22 @@
  */
 package org.kie.dmn.model.v1_1;
 
-import org.kie.dmn.model.impl.AbstractTExpression;
+import javax.xml.namespace.QName;
 
-public abstract class TExpression extends AbstractTExpression { }
+import org.kie.dmn.model.api.Expression;
+
+public abstract class TExpression extends TDMNElement implements Expression {
+
+    private QName typeRef;
+
+    @Override
+    public QName getTypeRef() {
+        return typeRef;
+    }
+
+    @Override
+    public void setTypeRef( final QName value ) {
+        this.typeRef = value;
+    }
+
+}

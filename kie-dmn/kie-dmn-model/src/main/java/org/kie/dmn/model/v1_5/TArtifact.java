@@ -18,8 +18,8 @@
  */
 package org.kie.dmn.model.v1_5;
 
-import org.kie.dmn.model.impl.AbstractTArtifact;
+import org.kie.dmn.model.api.Artifact;
 
-public class TArtifact extends AbstractTArtifact implements URIFEELed {
+public class TArtifact extends TDMNElement implements Artifact {
 
 }

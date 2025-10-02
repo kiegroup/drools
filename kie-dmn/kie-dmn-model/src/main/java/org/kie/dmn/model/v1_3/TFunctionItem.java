@@ -18,8 +18,35 @@
  */
 package org.kie.dmn.model.v1_3;
 
-import org.kie.dmn.model.impl.AbstractTFunctionItem;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TFunctionItem extends AbstractTFunctionItem implements URIFEELed {
+import javax.xml.namespace.QName;
+
+import org.kie.dmn.model.api.FunctionItem;
+import org.kie.dmn.model.api.InformationItem;
+
+public class TFunctionItem extends TDMNElement implements FunctionItem {
+
+    protected List<InformationItem> parameters;
+    protected QName outputTypeRef;
+
+    @Override
+    public List<InformationItem> getParameters() {
+        if (parameters == null) {
+            parameters = new ArrayList<>();
+        }
+        return this.parameters;
+    }
+
+    @Override
+    public QName getOutputTypeRef() {
+        return outputTypeRef;
+    }
+
+    @Override
+    public void setOutputTypeRef(QName value) {
+        this.outputTypeRef = value;
+    }
 
 }

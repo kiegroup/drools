@@ -18,8 +18,22 @@
  */
 package org.kie.dmn.model.v1_1;
 
-import org.kie.dmn.model.impl.AbstractTInformationItem;
+import javax.xml.namespace.QName;
 
-public class TInformationItem extends AbstractTInformationItem implements URIFEELed {
+import org.kie.dmn.model.api.InformationItem;
+
+public class TInformationItem extends TNamedElement implements InformationItem {
+
+    private QName typeRef;
+
+    @Override
+    public QName getTypeRef() {
+        return typeRef;
+    }
+
+    @Override
+    public void setTypeRef( final QName value ) {
+        this.typeRef = value;
+    }
 
 }

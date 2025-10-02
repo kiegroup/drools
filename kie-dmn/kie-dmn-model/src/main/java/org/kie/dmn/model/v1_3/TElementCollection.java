@@ -18,8 +18,22 @@
  */
 package org.kie.dmn.model.v1_3;
 
-import org.kie.dmn.model.impl.AbstractTElementCollection;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TElementCollection extends AbstractTElementCollection implements URIFEELed {
+import org.kie.dmn.model.api.DMNElementReference;
+import org.kie.dmn.model.api.ElementCollection;
+
+public class TElementCollection extends TNamedElement implements ElementCollection {
+
+    protected List<DMNElementReference> drgElement;
+
+    @Override
+    public List<DMNElementReference> getDrgElement() {
+        if (drgElement == null) {
+            drgElement = new ArrayList<>();
+        }
+        return this.drgElement;
+    }
 
 }

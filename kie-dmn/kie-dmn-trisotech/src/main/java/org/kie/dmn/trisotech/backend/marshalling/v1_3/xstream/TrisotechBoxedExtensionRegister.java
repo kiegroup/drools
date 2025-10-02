@@ -20,8 +20,6 @@ package org.kie.dmn.trisotech.backend.marshalling.v1_3.xstream;
 
 import javax.xml.namespace.QName;
 
-import java.util.Collections;
-import java.util.Set;
 import org.kie.dmn.api.marshalling.DMNExtensionRegister;
 import org.kie.dmn.trisotech.model.v1_3.TConditional;
 import org.kie.dmn.trisotech.model.v1_3.TFilter;
@@ -32,11 +30,6 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.QNameMap;
 
 public class TrisotechBoxedExtensionRegister implements DMNExtensionRegister {
-
-    @Override
-    public Set<String> allowedModelPackages() {
-        return Collections.singleton("org.kie.dmn.trisotech.model.**");
-    }
 
     @Override
     public void registerExtensionConverters(XStream xStream) {
@@ -53,6 +46,7 @@ public class TrisotechBoxedExtensionRegister implements DMNExtensionRegister {
         xStream.registerConverter(new FilterConverter( xStream ) );
         xStream.registerConverter(new IteratorConverter(xStream));
         xStream.registerConverter(new NamedExpressionConverter( xStream ) );
+
     }
 
     @Override

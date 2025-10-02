@@ -18,8 +18,19 @@
  */
 package org.kie.dmn.model.v1_5;
 
-import org.kie.dmn.model.impl.AbstractTQuantified;
+import org.kie.dmn.model.api.ChildExpression;
+import org.kie.dmn.model.api.Quantified;
 
-public class TQuantified extends AbstractTQuantified implements URIFEELed {
+public class TQuantified extends TIterator implements Quantified {
+    
+    protected ChildExpression satisfies;
+
+    public ChildExpression getSatisfies() {
+        return satisfies;
+    }
+
+    public void setSatisfies(ChildExpression value) {
+        this.satisfies = value;
+    }
 
 }
