@@ -9,18 +9,31 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency: 
+  group: sync-main
+  cancel-in-progress: true
+
 jobs:
   sync-main:
+    # TODO: uncomment this
     # if: github.repository_owner == 'kiegroup'
     name: Sync main branch
     runs-on: ubuntu-latest
 
     steps:
-      - name: Create a PR to sync main branch with main-apache
-        uses: fantonangeli/kie-ci/.ci/actions/main-sync@SRVLOGIC-633-Fix-token-issues-and-redesign-of-upstream-sync-CI
+      - name: Merge local branch with upstream/main (no commit)
+        id: merge_upstream_main
+        # TODO: change this
+        uses: fantonangeli/kie-ci/.ci/actions/main-sync/merge@SRVLOGIC-633-Fix-token-issues-and-redesign-of-upstream-sync-CI
         with:
-          main_sync_workflow_exclude_paths: ${{ vars.MAIN_SYNC_WORKFLOW_EXCLUDE_PATHS }}
-          main_sync_workflow_pr_reviewers: ${{ vars.MAIN_SYNC_WORKFLOW_PR_REVIEWERS }}
-          upstream_remote: https://github.com/apache/incubator-kie-drools.git
-          dry_run: true
+          exclude_paths: ${{ vars.MAIN_SYNC_WORKFLOW_EXCLUDE_PATHS }}
+          upstream_remote: ${{ vars.UPSTREAM_URL }}
+          github_token: ${{ secrets.APACHE_SYNC_MIDSTREAM_TOKEN }}
+
+      - name: Create a PR to sync main branch with upstream/main
+        # TODO: change this
+        uses: fantonangeli/kie-ci/.ci/actions/main-sync/create-pr@SRVLOGIC-633-Fix-token-issues-and-redesign-of-upstream-sync-CI
+        with:
+          pr_reviewers: ${{ vars.MAIN_SYNC_WORKFLOW_PR_REVIEWERS }}
+          sync_branch: ${{ steps.merge_upstream_main.outputs.sync_branch }}
           github_token: ${{ secrets.APACHE_SYNC_MIDSTREAM_TOKEN }}
