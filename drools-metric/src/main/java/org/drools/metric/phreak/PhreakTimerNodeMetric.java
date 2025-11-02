@@ -19,9 +19,9 @@
 package org.drools.metric.phreak;
 
 import org.drools.core.common.ActivationsManager;
+import org.drools.core.common.ReteEvaluator;
 import org.drools.core.common.TupleSets;
 import org.drools.core.phreak.PhreakTimerNode;
-import org.drools.core.reteoo.LeftTuple;
 import org.drools.core.reteoo.LeftTupleSink;
 import org.drools.core.reteoo.PathMemory;
 import org.drools.core.reteoo.SegmentMemory;
@@ -30,6 +30,10 @@ import org.drools.core.reteoo.TimerNode.TimerNodeMemory;
 import org.drools.metric.util.MetricLogUtils;
 
 public class PhreakTimerNodeMetric extends PhreakTimerNode {
+
+    public PhreakTimerNodeMetric(ReteEvaluator reteEvaluator) {
+        super(reteEvaluator);
+    }
 
     @Override
     public void doNode(TimerNode timerNode,
