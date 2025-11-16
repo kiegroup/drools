@@ -17,16 +17,10 @@ git:
       branch: main
   - name: 8.44.2.x-prod
     seed:
-      branch: seed-drools-8.44.2.x
-  - name: 9.101.x-prod
+      branch: seed-drools-10.1.x
+  - name: 2.2.x
     seed:
-      branch: seed-drools-9.101.x-prod
-  - name: 9.101.x-prod
-    seed:
-      branch: seed-drools-9.102.x-prod
-  - name: 9.103.x-prod
-    seed:
-      branch: seed-drools-9.103.x-prod
+      branch: seed-drools-2.2.x
 seed:
   config_file:
     git:
