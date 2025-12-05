@@ -46,6 +46,7 @@ import static org.mvel2.asm.Opcodes.ALOAD;
 import static org.mvel2.asm.Opcodes.ARETURN;
 import static org.mvel2.asm.Opcodes.ASTORE;
 import static org.mvel2.asm.Opcodes.CHECKCAST;
+import static org.drools.mvel.asm.TypeConversionHelper.*;
 import static org.mvel2.asm.Opcodes.GOTO;
 import static org.mvel2.asm.Opcodes.ICONST_0;
 import static org.mvel2.asm.Opcodes.IFNE;
@@ -202,12 +203,20 @@ public final class GeneratorHelper {
 
         protected int storeObjectFromDeclaration(Declaration declaration, String declarationType, int registry) {
             String readMethod = declaration.getNativeReadMethodName();
-            boolean isObject = readMethod.equals("getValue");
+            boolean isObject = readMethod.equals(GET_VALUE);
             String expectedTypeDescr = typeDescr(declarationType);
             boolean needsPrimitive = !(expectedTypeDescr.startsWith("L") || expectedTypeDescr.startsWith("["));
-            String returnedType = isObject ? "Ljava/lang/Object;" : typeDescr(declaration.getTypeName());
+            
+            // Determine conversion type and actual return type using helper
+            TypeConversionHelper.ConversionType conversionType = TypeConversionHelper.determineConversionType(readMethod, declarationType);
+            String actualReturnType = TypeConversionHelper.getActualReturnType(readMethod, isObject, typeDescr(declaration.getTypeName()));
+            
             mv.visitMethodInsn(INVOKEVIRTUAL, Declaration.class.getName().replace('.', '/'), readMethod,
-                               "(L" + ValueResolver.class.getName().replace('.', '/') + ";Ljava/lang/Object;)" + returnedType);
+                               "(L" + ValueResolver.class.getName().replace('.', '/') + ";Ljava/lang/Object;)" + actualReturnType);
+            
+            // Emit type conversion instructions if needed
+            TypeConversionHelper.emitTypeConversion(mv, conversionType);
+            
             if (isObject) {
                 Class<?> declarationClass = declaration.getDeclarationClass();
                 if (declarationClass != null) {
@@ -217,9 +226,12 @@ public final class GeneratorHelper {
 
             if (needsPrimitive && isObject) {
                 castToPrimitive(convertPrimitiveNameToType(declarationType));
-            } else if (!needsPrimitive && !isObject) {
+            } else if (!needsPrimitive && !isObject && conversionType == TypeConversionHelper.ConversionType.NONE) {
+                // Only call original castFromPrimitive logic if no conversion was applied
                 castFromPrimitive(convertPrimitiveNameToType(declaration.getExtractor().getExtractToClassName()));
-            } else if (needsPrimitive && !isObject && !returnedType.equals(declarationType)) {
+            } else if (needsPrimitive && !isObject && !actualReturnType.equals(expectedTypeDescr) && 
+                       conversionType != TypeConversionHelper.ConversionType.FLOAT && 
+                       conversionType != TypeConversionHelper.ConversionType.INT) {
                 castPrimitiveToPrimitive(declaration.getExtractor().getExtractToClass(), convertPrimitiveNameToType(declarationType));
             }
 
@@ -288,10 +300,18 @@ public final class GeneratorHelper {
                 }
 
                 String readMethod = declarations[i].getNativeReadMethodName();
-                boolean isObject = readMethod.equals("getValue");
+                boolean isObject = readMethod.equals(GET_VALUE);
                 String declarationType = declarations[i].getTypeName();
-                String returnedType = isObject ? "Ljava/lang/Object;" : typeDescr(declarationType);
-                mv.visitMethodInsn(INVOKEVIRTUAL, Declaration.class.getName().replace('.', '/'), readMethod, "(L" + ValueResolver.class.getName().replace('.', '/') + ";Ljava/lang/Object;)" + returnedType);
+                
+                // Determine conversion type and actual return type using helper
+                TypeConversionHelper.ConversionType conversionType = TypeConversionHelper.determineConversionType(readMethod, declarationType);
+                String actualReturnType = TypeConversionHelper.getActualReturnType(readMethod, isObject, typeDescr(declarationType));
+                
+                mv.visitMethodInsn(INVOKEVIRTUAL, Declaration.class.getName().replace('.', '/'), readMethod, "(L" + ValueResolver.class.getName().replace('.', '/') + ";Ljava/lang/Object;)" + actualReturnType);
+                
+                // Emit type conversion instructions if needed
+                TypeConversionHelper.emitTypeConversion(mv, conversionType);
+                
                 if (isObject) {
                     mv.visitTypeInsn(CHECKCAST, internalName(declarationType));
                 }
