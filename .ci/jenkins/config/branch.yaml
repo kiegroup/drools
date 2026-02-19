@@ -84,7 +84,7 @@ maven:
     creds_id: kogito-snapshots-upload
   pr_checks:
     repository:
-      url: https://bxms-qe.rhev-ci-vms.eng.rdu2.redhat.com:8443/nexus/content/repositories/kogito-runtimes-pr-full-testing/
+      url: https://baqe-nexus.apps.int.prod-scale-spoke1-aws-us-east-1.itup.redhat.com/nexus/content/repositories/kogito-runtimes-pr-full-testing/
       creds_id: unpacks-zip-on-qa-nexus
 cloud:
   image:
@@ -97,5 +97,5 @@ jenkins:
   email_creds_id: DROOLS_CI_EMAIL_TO
   default_tools:
     jdk: kie-jdk17
-    maven: kie-maven-3.9.6
+    maven: kie-maven-3.9.12
     sonar_jdk: kie-jdk17
