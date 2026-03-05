@@ -1,5 +1,4 @@
 name: Drools
-
 on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
@@ -11,7 +10,6 @@ on:
       - '*.txt'
       - 'docsimg/**'
       - '.ci/jenkins/**'
-
 jobs:
   drools-build:
     concurrency:
@@ -44,6 +42,7 @@ jobs:
         env:
           BUILD_MVN_OPTS_CURRENT: -Dfull
           MAVEN_OPTS: "-Dfile.encoding=UTF-8"
+          BUILD_MVN_OPTS: " -Dproductized"
         with:
           definition-file: https://raw.githubusercontent.com/${GROUP:kiegroup}/drools/${BRANCH:main}/.ci/buildchain-config.yaml
           annotations-prefix: ${{ runner.os }}-${{ matrix.java-version }}/${{ matrix.maven-version }}
