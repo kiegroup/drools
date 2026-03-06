@@ -13,6 +13,13 @@ then
   exit
 fi
 
+# Detect Operating System a modify the SED_CMD accordingly
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    SED_CMD=(sed -i '')
+else
+    SED_CMD=(sed -i)
+fi
+
 config_file="${1}"
 for line in `cat "$config_file"`
 do
@@ -27,6 +34,6 @@ do
             exit 1
         fi
         echo "Removing module ${module} from ${pom}"
-        sed -i "/<module>${module}<\/module>/d" ${pom}
+        "${SED_CMD[@]}" "/<module>${module}<\/module>/d" ${pom}
     done
 done
