@@ -40,7 +40,7 @@ jobs:
       - name: Build Chain
         uses: kiegroup/kie-ci/.ci/actions/build-chain@main
         env:
-          BUILD_MVN_OPTS_CURRENT: -Dfull
+          BUILD_MVN_OPTS_CURRENT: ""
           MAVEN_OPTS: "-Dfile.encoding=UTF-8"
           BUILD_MVN_OPTS: " -Dproductized"
         with:
