@@ -22,6 +22,8 @@ for /f "usebackq delims=" %%L in ("%config_file%") do (
     REM Split line by semicolon
     for /f "tokens=1,2 delims=;" %%A in ("!line!") do (
         set "pom=%%A"
+        REM Replace forward slashes with backslashes
+        set "pom=!pom:/=\!"
         set "modules=%%B"
         
         REM Process each module (comma-separated)
