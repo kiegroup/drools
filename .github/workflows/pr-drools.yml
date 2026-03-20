@@ -39,13 +39,24 @@ jobs:
           java-version: ${{ matrix.java-version }}
           maven-version: ${{ matrix.maven-version }}
           cache-key-prefix: ${{ runner.os }}-${{ matrix.java-version }}-maven${{ matrix.maven-version }}
-      - name: Build Chain
+      - name: Build Chain on Linux
+        if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: kiegroup/kie-ci/.ci/actions/build-chain@main
         env:
           BUILD_MVN_OPTS_CURRENT: ""
           MAVEN_OPTS: "-Dfile.encoding=UTF-8"
         with:
-          definition-file: https://raw.githubusercontent.com/${GROUP:kiegroup}/drools/${BRANCH:main}/.ci/buildchain-config.yaml
+          definition-file: https://raw.githubusercontent.com/${GROUP:kiegroup}/kogito-pipelines/${BRANCH:main}/.ci/pull-request-config.yaml
+          annotations-prefix: ${{ runner.os }}-${{ matrix.java-version }}/${{ matrix.maven-version }}
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Build Chain on Windows
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: kiegroup/kie-ci/.ci/actions/build-chain@main
+        env:
+          BUILD_MVN_OPTS_CURRENT: -Dfull
+          MAVEN_OPTS: "-Dfile.encoding=UTF-8"
+        with:
+          definition-file: https://raw.githubusercontent.com/${GROUP:kiegroup}/kogito-pipelines/${BRANCH:main}/.ci/pull-request-config-windows.yaml
           annotations-prefix: ${{ runner.os }}-${{ matrix.java-version }}/${{ matrix.maven-version }}
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Surefire Report
