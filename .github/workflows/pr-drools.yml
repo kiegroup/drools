@@ -43,7 +43,6 @@ jobs:
         if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: kiegroup/kie-ci/.ci/actions/build-chain@main
         env:
-          BUILD_MVN_OPTS_CURRENT: ""
           MAVEN_OPTS: "-Dfile.encoding=UTF-8"
         with:
           definition-file: https://raw.githubusercontent.com/${GROUP:kiegroup}/kogito-pipelines/${BRANCH:main}/.ci/pull-request-config.yaml
