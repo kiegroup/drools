@@ -35,6 +35,7 @@
   <properties>
     <java.module.name>org.kie.dmn.xsd.resources</java.module.name>
     <output.spec.directory>${project.build.directory}/classes/org/omg/spec/DMN</output.spec.directory>
+    <download.plugin.skip>true</download.plugin.skip>
   </properties>
 
   <build>
