@@ -216,17 +216,24 @@ public class PersisterHelper extends MarshallingHelper {
 
     private static void sign(ProtobufMessages.Header.Builder _header,
                              byte[] buff ) {
-        KeyStoreHelper helper = KeyStoreHelper.get();
-        if (helper.isSigned()) {
-            try {
-                _header.setSignature( ProtobufMessages.Signature.newBuilder()
-                                      .setKeyAlias( helper.getPvtKeyAlias() )
-                                      .setSignature( ByteString.copyFrom( helper.signDataWithPrivateKey( buff ) ) )
-                                      .build() );
-            } catch (Exception e) {
-                throw new RuntimeException( "Error signing session: " + e.getMessage(),
-                                            e );
+        try {
+            KeyStoreHelper helper = KeyStoreHelper.get();
+            if (helper.isSigned()) {
+                try {
+                    _header.setSignature( ProtobufMessages.Signature.newBuilder()
+                                          .setKeyAlias( helper.getPvtKeyAlias() )
+                                          .setSignature( ByteString.copyFrom( helper.signDataWithPrivateKey( buff ) ) )
+                                          .build() );
+                } catch (Exception e) {
+                    throw new RuntimeException( "Error signing session: " + e.getMessage(),
+                                                e );
+                }
             }
+        } catch (NoClassDefFoundError e) {
+            // KeyStoreHelper failed to initialize - log warning and continue without signing
+            org.slf4j.LoggerFactory.getLogger(PersisterHelper.class).warn(
+                "KeyStoreHelper initialization failed. Continuing without signing. " +
+                "This is expected if keystore properties are not configured.", e);
         }
     }
     
@@ -304,14 +311,24 @@ public class PersisterHelper extends MarshallingHelper {
 
     private static void checkSignature(Header _header,
                                        byte[] sessionbuff) {
+        try {
+            KeyStoreHelper helper = KeyStoreHelper.get();
+            boolean signed = _header.hasSignature();
+            if ( helper.isSigned() != signed ) {
+                throw new RuntimeException( "This environment is configured to work with " +
+                                            (helper.isSigned() ? "signed" : "unsigned") +
+                                            " serialized objects, but the given object is " +
+                                            (signed ? "signed" : "unsigned") + ". Deserialization aborted." );
+            }
+        } catch (NoClassDefFoundError e) {
+            // KeyStoreHelper failed to initialize - log warning and skip signature check
+            org.slf4j.LoggerFactory.getLogger(PersisterHelper.class).warn(
+                "KeyStoreHelper initialization failed. Skipping signature verification. " +
+                "This is expected if keystore properties are not configured.", e);
+            return;
+        }
         KeyStoreHelper helper = KeyStoreHelper.get();
         boolean signed = _header.hasSignature();
-        if ( helper.isSigned() != signed ) {
-            throw new RuntimeException( "This environment is configured to work with " +
-                                        (helper.isSigned() ? "signed" : "unsigned") +
-                                        " serialized objects, but the given object is " +
-                                        (signed ? "signed" : "unsigned") + ". Deserialization aborted." );
-        }
         if ( signed ) {
             if ( helper.getPubKeyStore() == null ) {
                 throw new RuntimeException( "The session was serialized with a signature. Please configure a public keystore with the public key to check the signature. Deserialization aborted." );
