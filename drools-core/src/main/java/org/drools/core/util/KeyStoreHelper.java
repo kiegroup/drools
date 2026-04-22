@@ -85,28 +85,59 @@ public class KeyStoreHelper {
     private KeyStore pubKeyStore;
     private KeyStore pwdKeyStore;
 
+    private RuntimeException initializationFailure;
+
     /**
      * Creates a KeyStoreHelper and initialises the KeyStore, by loading its entries.
      * @throws RuntimeException in case any error happens when initialising and loading the keystore.
      */
     KeyStoreHelper() {
-        try {
-            this.signed = Boolean.valueOf(System.getProperty(KeyStoreConstants.PROP_SIGN,
-                                                             RuleBaseConfiguration.DEFAULT_SIGN_ON_SERIALIZATION)).booleanValue();
-            this.allowVerifyOldSignAlgo = Boolean.parseBoolean(System.getProperty(KeyStoreConstants.PROP_VERIFY_OLD_SIGN, "false"));
+        this(true, null);
+    }
 
-            loadPrivateKeyStoreProperties();
-            loadPublicKeyStoreProperties();
-            loadPasswordKeyStoreProperties();
+    private KeyStoreHelper(boolean init, RuntimeException initializationFailure) {
+        this.initializationFailure = initializationFailure;
+        if (init) {
+            try {
+                this.signed = Boolean.valueOf(System.getProperty(KeyStoreConstants.PROP_SIGN,
+                                                                 RuleBaseConfiguration.DEFAULT_SIGN_ON_SERIALIZATION)).booleanValue();
+                this.allowVerifyOldSignAlgo = Boolean.parseBoolean(System.getProperty(KeyStoreConstants.PROP_VERIFY_OLD_SIGN, "false"));
 
-            initKeyStore();
-        } catch (Exception e) {
-            throw new RuntimeException("Error initialising KeyStore: " + e.getMessage(), e);
+                loadPrivateKeyStoreProperties();
+                loadPublicKeyStoreProperties();
+                loadPasswordKeyStoreProperties();
+
+                initKeyStore();
+            } catch (Exception e) {
+                throw new RuntimeException("Error initialising KeyStore: " + e.getMessage(), e);
+            }
         }
     }
 
+    /**
+     * Holder class for lazy initialization of KeyStoreHelper singleton.
+     * This pattern ensures that if initialization fails, subsequent calls
+     * can still succeed without causing NoClassDefFoundError.
+     */
     private static class KeyStoreHelperHolder {
-        private static KeyStoreHelper INSTANCE = new KeyStoreHelper();
+        private static volatile KeyStoreHelper INSTANCE = createInstance();
+        
+        private static KeyStoreHelper createInstance() {
+            try {
+                return new KeyStoreHelper();
+            } catch (Throwable e) {
+                // Log the error but don't fail - create a non-initialized instance
+                LoggerFactory.getLogger(KeyStoreHelper.class).warn(
+                    "Failed to initialize KeyStoreHelper. Signing will be disabled. " +
+                    "This is expected if keystore properties are not configured. Error: " + e.getMessage(), e);
+                return new KeyStoreHelper(false, e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e));
+            }
+        }
+        
+        // only for testing purposes
+        static void reinitialize() {
+            INSTANCE = createInstance();
+        }
     }
 
     public static KeyStoreHelper get() {
@@ -115,7 +146,7 @@ public class KeyStoreHelper {
 
     // only for testing purposes
     public static void reInit() {
-        KeyStoreHelperHolder.INSTANCE = new KeyStoreHelper();
+        KeyStoreHelperHolder.reinitialize();
     }
 
     private void loadPrivateKeyStoreProperties() throws MalformedURLException {
@@ -182,6 +213,9 @@ public class KeyStoreHelper {
                                                      NoSuchAlgorithmException,
                                                      InvalidKeyException,
                                                      SignatureException {
+        if (initializationFailure != null) {
+            throw initializationFailure;
+        }
         if( pvtKeyStore == null ) {
             throw new RuntimeException( "Key store with private key not configured. Please configure it properly before using signed serialization." );
         }
@@ -195,6 +229,9 @@ public class KeyStoreHelper {
 
     // test purpose
     byte[] signDataWithPrivateKeyWithAlgorithm(byte[] data, String algorithm) throws UnrecoverableKeyException, KeyStoreException, NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+        if (initializationFailure != null) {
+            throw initializationFailure;
+        }
         if (pvtKeyStore == null) {
             throw new RuntimeException("Key store with private key not configured. Please configure it properly before using signed serialization.");
         }
@@ -227,6 +264,9 @@ public class KeyStoreHelper {
                                                                  NoSuchAlgorithmException,
                                                                  InvalidKeyException,
                                                                  SignatureException {
+        if (initializationFailure != null) {
+            throw initializationFailure;
+        }
         if( pubKeyStore == null ) {
             throw new RuntimeException( "Key store with public key not configured. Please configure it properly before using signed serialization." );
         }
@@ -271,6 +311,10 @@ public class KeyStoreHelper {
     }
 
     public boolean isSigned() {
+        if (initializationFailure != null) {
+            // If initialization failed, signing is disabled
+            return false;
+        }
         return signed;
     }
 
