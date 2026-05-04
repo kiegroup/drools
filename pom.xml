@@ -39,6 +39,10 @@
   </description>
   <url>http://www.drools.org</url>
   <inceptionYear>2001</inceptionYear>
+  <organization>
+    <name>The Apache Software Foundation</name>
+    <url>https://apache.org/</url>
+  </organization>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
