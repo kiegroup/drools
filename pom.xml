@@ -35,14 +35,10 @@
 
   <name>Drools :: Parent</name>
   <description>
-    The repo contains all code related to Drools project.
+    This repository is a fork of https://github.com/apache/incubator-kie-drools used for the purposes od SonataFlow.
   </description>
   <url>http://www.drools.org</url>
   <inceptionYear>2001</inceptionYear>
-  <organization>
-    <name>The Apache Software Foundation</name>
-    <url>https://apache.org/</url>
-  </organization>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -52,9 +48,9 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:https://github.com/apache/incubator-kie-drools.git</connection>
-    <developerConnection>scm:git:https://github.com/apache/incubator-kie-drools.git</developerConnection>
-    <url>https://github.com/apache/incubator-kie-drools</url>
+    <connection>scm:git:https://github.com/kiegroup/drools.git</connection>
+    <developerConnection>scm:git:https://github.com/kiegroup/drools.git</developerConnection>
+    <url>https://github.com/kiegroup/drools</url>
   </scm>
 
   <ciManagement>
@@ -65,57 +61,69 @@
     <system>GitHub Issues</system>
     <url>https://github.com/apache/incubator-kie-issues/issues</url>
   </issueManagement>
-  <developers>
-    <developer>
-      <name>The Apache KIE Team</name>
-      <email>dev@kie.apache.org</email>
-      <url>https://kie.apache.org</url>
-      <organization>Apache Software Foundation</organization>
-      <organizationUrl>http://apache.org/</organizationUrl>
-    </developer>
-  </developers>
-  <mailingLists>
-    <mailingList>
-      <name>Development List</name>
-      <subscribe>dev-subscribe@kie.apache.org</subscribe>
-      <unsubscribe>dev-unsubscribe@kie.apache.org</unsubscribe>
-      <post>dev@kie.apache.org</post>
-      <archive>https://lists.apache.org/list.html?dev@kie.apache.org</archive>
-    </mailingList>
-    <mailingList>
-      <name>User List</name>
-      <subscribe>users-subscribe@kie.apache.org</subscribe>
-      <unsubscribe>users-unsubscribe@kie.apache.org</unsubscribe>
-      <post>users@kie.apache.org</post>
-      <archive>https://lists.apache.org/list.html?users@kie.apache.org</archive>
-    </mailingList>
-    <mailingList>
-      <name>Commits List</name>
-      <subscribe>commits-subscribe@kie.apache.org</subscribe>
-      <unsubscribe>commits-unsubscribe@kie.apache.org</unsubscribe>
-      <post>commits@kie.apache.org</post>
-      <archive>https://lists.apache.org/list.html?commits@kie.apache.org</archive>
-    </mailingList>
-    <mailingList>
-      <name>setup</name>
-      <subscribe>https://groups.google.com/forum/#!forum/drools-setup</subscribe>
-      <unsubscribe>https://groups.google.com/forum/#!forum/drools-setup</unsubscribe>
-      <otherArchives>
-        <!-- Very old (and long deprecated) user mailing list -->
-        <otherArchive>http://drools.46999.n3.nabble.com/Drools-User-forum-f47000.html</otherArchive>
-      </otherArchives>
-    </mailingList>
-    <mailingList>
-      <name>usage</name>
-      <subscribe>https://groups.google.com/forum/#!forum/drools-usage</subscribe>
-      <unsubscribe>https://groups.google.com/forum/#!forum/drools-usage</unsubscribe>
-    </mailingList>
-  </mailingLists>
 
   <properties>
     <project.build.outputTimestamp>2024-01-12T00:00:00Z</project.build.outputTimestamp>
     <version.maven.artifact.plugin>3.4.1</version.maven.artifact.plugin>
   </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/kubesmarts/sonataflow-maven-repository</url>
+    </repository>
+    <snapshotRepository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/kubesmarts/sonataflow-maven-repository</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>central</id>
+      <name>Central</name>
+      <url>https://repo1.maven.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>github</id>
+      <name>GitHub Repository</name>
+      <url>https://maven.pkg.github.com/kubesmarts/sonataflow-maven-repository</url>
+    </repository>
+    <repository>
+      <id>redhat-ga-repository</id>
+      <url>https://maven.repository.redhat.com/ga</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>central</id>
+      <name>Central</name>
+      <url>https://repo1.maven.org/maven2/</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>github</id>
+      <name>GitHub Repository</name>
+      <url>https://maven.pkg.github.com/kubesmarts/sonataflow-maven-repository</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>redhat-ga-plugin-repository</id>
+      <url>https://maven.repository.redhat.com/ga</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 
   <build>
     <pluginManagement>
