@@ -31,7 +31,7 @@
   <parent>
     <artifactId>kie-maven-plugin-test-kjar-8-no-exec-model</artifactId>
     <groupId>org.kie</groupId>
-    <version>@org.kie.version@</version>
+    <version>111-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 

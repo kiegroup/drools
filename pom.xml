@@ -31,7 +31,7 @@
   <groupId>org.kie</groupId>
   <artifactId>drools-parent</artifactId>
   <packaging>pom</packaging>
-  <version>999-SNAPSHOT</version>
+  <version>111-SNAPSHOT</version>
 
   <name>Drools :: Parent</name>
   <description>
@@ -84,7 +84,7 @@
     <repository>
       <id>central</id>
       <name>Central</name>
-      <url>https://repo1.maven.org/maven2/</url>
+      <url>https://repo.maven.apache.org/maven2/</url>
     </repository>
     <repository>
       <id>github</id>
@@ -106,7 +106,7 @@
     <pluginRepository>
       <id>central</id>
       <name>Central</name>
-      <url>https://repo1.maven.org/maven2/</url>
+      <url>https://repo.maven.apache.org/maven2/</url>
     </pluginRepository>
     <pluginRepository>
       <id>github</id>
