@@ -44,7 +44,6 @@ jobs:
         uses: kiegroup/kie-ci/.ci/actions/build-chain@main
         env:
           MAVEN_OPTS: "-Dfile.encoding=UTF-8"
-          BUILD_MVN_OPTS: "-nsu -ntp -fae -e -Dproductized -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dmaven.wagon.http.retryHandler.count=3"
         with:
           definition-file: https://raw.githubusercontent.com/${GROUP:kiegroup}/kogito-pipelines/${BRANCH:main}/.ci/pull-request-config.yaml
           annotations-prefix: ${{ runner.os }}-${{ matrix.java-version }}/${{ matrix.maven-version }}
@@ -54,7 +53,6 @@ jobs:
         uses: kiegroup/kie-ci/.ci/actions/build-chain@main
         env:
           MAVEN_OPTS: "-Dfile.encoding=UTF-8"
-          BUILD_MVN_OPTS: "-nsu -ntp -fae -e -Dproductized -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dmaven.wagon.http.retryHandler.count=3"
         with:
           definition-file: https://raw.githubusercontent.com/${GROUP:kiegroup}/kogito-pipelines/${BRANCH:main}/.ci/pull-request-config-windows.yaml
           annotations-prefix: ${{ runner.os }}-${{ matrix.java-version }}/${{ matrix.maven-version }}
