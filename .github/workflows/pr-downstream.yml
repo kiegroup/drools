@@ -56,7 +56,6 @@ jobs:
           starting-project: kiegroup/${{ matrix.repository }}
           github-token: "${{ secrets.GITHUB_TOKEN }}"
         env: 
-          BUILD_MVN_OPTS: ""
           KOGITO_EXAMPLES_SUBFOLDER_POM: ${{ matrix.env_KOGITO_EXAMPLES_SUBFOLDER_POM }}
       - name: Surefire Report
         uses: kiegroup/kie-ci/.ci/actions/surefire-report@main

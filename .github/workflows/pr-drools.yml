@@ -52,7 +52,6 @@ jobs:
         if: ${{ matrix.os == 'windows-latest' }}
         uses: kiegroup/kie-ci/.ci/actions/build-chain@main
         env:
-          BUILD_MVN_OPTS_CURRENT: -Dfull
           MAVEN_OPTS: "-Dfile.encoding=UTF-8"
         with:
           definition-file: https://raw.githubusercontent.com/${GROUP:kiegroup}/kogito-pipelines/${BRANCH:main}/.ci/pull-request-config-windows.yaml

@@ -24,7 +24,7 @@
 
   <groupId>archetype.it</groupId>
   <artifactId>basic</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>111-SNAPSHOT</version>
   <packaging>kjar</packaging>
 
   <name>basic</name>

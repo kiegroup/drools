@@ -25,7 +25,7 @@
 
   <groupId>org.drools.testcoverage</groupId>
   <artifactId>kie-project-simple</artifactId>
-  <version>1.0.0</version>
+  <version>111-SNAPSHOT</version>
   <packaging>kjar</packaging>
 
   <name>kie-project-simple</name>
