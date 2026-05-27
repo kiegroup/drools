@@ -18,9 +18,6 @@ git:
   - name: 8.44.2.x-prod
     seed:
       branch: seed-drools-8.44.2.x
-  - name: 9.103.x-prod
-    seed:
-      branch: seed-drools-9.103.x-prod
 seed:
   config_file:
     git:
