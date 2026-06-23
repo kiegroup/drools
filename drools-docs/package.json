@@ -9,5 +9,8 @@
   },
   "dependencies": {
     "@antora/lunr-extension": "^1.0.0-alpha.6"
+  },
+  "overrides": {
+    "js-yaml": "^4.2.0"
   }
 }
