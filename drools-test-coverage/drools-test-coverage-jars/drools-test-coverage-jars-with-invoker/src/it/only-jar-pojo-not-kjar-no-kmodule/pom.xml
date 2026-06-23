@@ -25,7 +25,7 @@
 
   <groupId>org.drools.testcoverage</groupId>
   <artifactId>only-jar-pojo-not-kjar-no-kmodule</artifactId>
-  <version>111-SNAPSHOT</version>
+  <version>9.106.0</version>
   <packaging>jar</packaging>
 
   <properties>

@@ -25,7 +25,7 @@
 
   <groupId>org.kie.test</groupId>
   <artifactId>test-module</artifactId>
-  <version>111-SNAPSHOT</version>
+  <version>9.106.0</version>
   <packaging>kjar</packaging>
 
   <properties>

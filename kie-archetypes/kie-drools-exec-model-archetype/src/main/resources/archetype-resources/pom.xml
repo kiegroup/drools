@@ -27,7 +27,7 @@
 
   <groupId>${dollar}{groupId}</groupId>
   <artifactId>${dollar}{artifactId}</artifactId>
-  <version>111-SNAPSHOT</version>
+  <version>9.106.0</version>
   <packaging>kjar</packaging>
 
   <name>${dollar}{artifactId}</name>

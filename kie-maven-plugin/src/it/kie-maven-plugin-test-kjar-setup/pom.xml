@@ -26,7 +26,7 @@
 
   <groupId>org.kie</groupId>
   <artifactId>kie-maven-plugin-test-kjar-setup</artifactId>
-  <version>111-SNAPSHOT</version>
+  <version>9.106.0</version>
 
   <packaging>pom</packaging>
 

@@ -26,7 +26,7 @@
   <parent>
     <groupId>org.kie</groupId>
     <artifactId>kie-maven-plugin-test-kjar-parent</artifactId>
-    <version>111-SNAPSHOT</version>
+    <version>9.106.0</version>
     <relativePath>../kie-maven-plugin-test-kjar-setup/kie-maven-plugin-test-kjar-parent/pom.xml</relativePath>
   </parent>
 
