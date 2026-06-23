@@ -31,6 +31,10 @@ nbproject
 *.iml
 build.log
 
+# Node.js / npm artifacts (e.g. downloaded by frontend-maven-plugin)
+node/
+node_modules/
+
 # generated files
 dependency-reduced-pom.xml
 
