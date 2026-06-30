@@ -58,7 +58,7 @@
     <version.commons-io>2.20.0</version.commons-io>
     <version.common-text>1.14.0</version.common-text>
     <version.com.fasterxml.jackson>2.21.2</version.com.fasterxml.jackson>
-    <version.com.fasterxml.jackson.databind>2.21.2</version.com.fasterxml.jackson.databind>
+    <version.com.fasterxml.jackson.databind>2.22.0</version.com.fasterxml.jackson.databind>
     <version.com.fasterxml.jackson.annotations>2.21</version.com.fasterxml.jackson.annotations>
     <version.com.github.victools>4.37.0</version.com.github.victools> <!-- victools should align with Jackson if possible -->
     <version.com.miglayout>3.7.4</version.com.miglayout>
