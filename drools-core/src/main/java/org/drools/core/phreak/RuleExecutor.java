@@ -311,7 +311,12 @@ public class RuleExecutor {
                 throw new IllegalStateException();
             }
         }
-        dormantMatches.remove(tuple);
+        if (tuple.getPrevious() != null || dormantMatches.getFirst() == tuple) {
+            dormantMatches.remove(tuple);
+        } else {
+            log.warn("Skipping removeDormantTuple for orphan tuple {} on rule \"{}\" — tuple is not present in dormantMatches",
+                      tuple, ruleAgendaItem.getRule().getName());
+        }
         if (DEBUG_DORMANT_TUPLE) {
             tuple.setDormant(false);
         }
@@ -340,7 +345,8 @@ public class RuleExecutor {
         activeMatches.remove(tuple);
         if (tuple.getStagedType() != Tuple.DELETE) {
             addDormantTuple(tuple);
-        }
+        } // if Tuple.DELETE, it's not in activeMatches nor dormantMatches. Basically, unlinked from parent nodes, so will be GC'ed.
+          // Note: there could be a case where such a tuple will be retained and activated again. (e.g., accPropCtx.getResultLeftTuple())
         if (queue != null) {
             removeQueuedLeftTuple(tuple);
         }
