@@ -70,6 +70,7 @@ import org.drools.xml.support.containers.WorkItemResultsContainer;
 import org.kie.api.command.Command;
 import org.kie.api.command.ExecutableCommand;
 import org.kie.api.command.Setter;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.rule.FactHandle;
 import org.kie.api.runtime.rule.QueryResults;
@@ -1237,7 +1238,7 @@ public class XStreamJSon {
                             MarshallingContext context) {
             StartProcessCommand cmd = (StartProcessCommand) object;
             writer.startNode( "process-id" );
-            writer.setValue( cmd.getProcessId() );
+            writer.setValue( cmd.getProcessId().id() );
             writer.endNode();
 
             if ( cmd.getOutIdentifier() != null ) {
@@ -1279,7 +1280,7 @@ public class XStreamJSon {
             }
 
             StartProcessCommand cmd = new StartProcessCommand();
-            cmd.setProcessId( processId );
+            cmd.setProcessId( new KogitoProcessId(processId) );
             cmd.setParameters( params );
             if ( outIdentifier != null ) {
                 cmd.setOutIdentifier( outIdentifier );

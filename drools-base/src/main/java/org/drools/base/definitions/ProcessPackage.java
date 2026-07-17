@@ -68,7 +68,7 @@ public class ProcessPackage implements ResourceTypePackage<Process> {
 
     @Override
     public void add(Process processedResource) {
-        this.ruleFlows.put(processedResource.getId(), processedResource);
+        this.ruleFlows.put(processedResource.getId().id(), processedResource);
     }
 
     public Iterator<Process> iterator() {

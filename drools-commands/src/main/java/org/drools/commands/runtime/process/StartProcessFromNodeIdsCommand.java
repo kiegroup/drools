@@ -27,6 +27,7 @@ import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.Context;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.KieSession;
@@ -55,17 +56,17 @@ public class StartProcessFromNodeIdsCommand extends StartProcessCommand implemen
     }
 
 
-    public StartProcessFromNodeIdsCommand(String processId, String outIdentifier) {
+    public StartProcessFromNodeIdsCommand(KogitoProcessId processId, String outIdentifier) {
         super(processId);
         setOutIdentifier(outIdentifier);
     }
 
-    public StartProcessFromNodeIdsCommand(String processId, Map<String, Object> parameters) {
+    public StartProcessFromNodeIdsCommand(KogitoProcessId processId, Map<String, Object> parameters) {
         super(processId);
         setParameters(parameters);
     }
 
-    public StartProcessFromNodeIdsCommand(String processId, Map<String, Object> parameters, String outIdentifier) {
+    public StartProcessFromNodeIdsCommand(KogitoProcessId processId, Map<String, Object> parameters, String outIdentifier) {
         this(processId, outIdentifier);
         setParameters(parameters);
     }

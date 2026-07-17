@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.internal.utils.KieService;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.ObjectFilter;
@@ -97,9 +98,9 @@ public interface KieCommands extends KieService {
     Command newGetGlobal(String identifier,
                          String outIdentifier);
 
-    Command newStartProcess(String processId);
+    Command newStartProcess(KogitoProcessId processId);
 
-    Command newStartProcess(String processId,
+    Command newStartProcess(KogitoProcessId processId,
                             Map<String, Object> parameters);
 
     Command newSignalEvent(String type,

@@ -82,6 +82,7 @@ import org.drools.core.process.WorkItemManager;
 import org.drools.base.rule.EntryPointId;
 import org.kie.api.KieBase;
 import org.kie.api.command.Command;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.event.process.ProcessEventListener;
 import org.kie.api.event.rule.AgendaEventListener;
 import org.kie.api.event.rule.RuleRuntimeEventListener;
@@ -260,19 +261,23 @@ public class CommandBasedStatefulKnowledgeSessionImpl extends AbstractRuntime
         runner.execute( command );
     }
 
-    public ProcessInstance startProcess(String processId) {
+    @Override
+    public ProcessInstance startProcess(KogitoProcessId processId) {
         return startProcess(processId, null, (AgendaFilter) null);
     }
 
-    public ProcessInstance startProcess(String processId, Map<String, Object> parameters) {
+    @Override
+    public ProcessInstance startProcess(KogitoProcessId processId, Map<String, Object> parameters) {
         return startProcess(processId, parameters, null);
     }
 
-    public ProcessInstance startProcess(String processId, AgendaFilter agendaFilter) {
+    @Override
+    public ProcessInstance startProcess(KogitoProcessId processId, AgendaFilter agendaFilter) {
         return startProcess(processId, null, agendaFilter);
     }
 
-    public ProcessInstance startProcess(String processId, Map<String, Object> parameters, AgendaFilter agendaFilter) {
+    @Override
+    public ProcessInstance startProcess(KogitoProcessId processId, Map<String, Object> parameters, AgendaFilter agendaFilter) {
         StartProcessCommand command = new StartProcessCommand();
         command.setProcessId( processId );
         command.setParameters( parameters );
@@ -280,7 +285,7 @@ public class CommandBasedStatefulKnowledgeSessionImpl extends AbstractRuntime
         return runner.execute( command );
     }
 
-    public ProcessInstance createProcessInstance(String processId,
+    public ProcessInstance createProcessInstance(KogitoProcessId processId,
 			                                     Map<String, Object> parameters) {
         CreateProcessInstanceCommand command = new CreateProcessInstanceCommand();
         command.setProcessId( processId );
@@ -577,14 +582,14 @@ public class CommandBasedStatefulKnowledgeSessionImpl extends AbstractRuntime
     }
 
     @Override
-    public ProcessInstance startProcess(String processId,
+    public ProcessInstance startProcess(KogitoProcessId processId,
             CorrelationKey correlationKey, Map<String, Object> parameters) {
         
         return this.runner.execute(new StartCorrelatedProcessCommand(processId, correlationKey, parameters));
     }
 
     @Override
-    public ProcessInstance createProcessInstance(String processId,
+    public ProcessInstance createProcessInstance(KogitoProcessId processId,
             CorrelationKey correlationKey, Map<String, Object> parameters) {
         
         return this.runner.execute(
@@ -599,7 +604,7 @@ public class CommandBasedStatefulKnowledgeSessionImpl extends AbstractRuntime
 
 
     @Override
-    public ProcessInstance startProcessFromNodeIds(String processId, CorrelationKey key, Map<String, Object> params, String... nodeIds) {
+    public ProcessInstance startProcessFromNodeIds(KogitoProcessId processId, CorrelationKey key, Map<String, Object> params, String... nodeIds) {
         StartProcessFromNodeIdsCommand command = new StartProcessFromNodeIdsCommand();
         command.setProcessId(processId);
         command.setParameters(params);
@@ -609,7 +614,7 @@ public class CommandBasedStatefulKnowledgeSessionImpl extends AbstractRuntime
     }
 
     @Override
-    public ProcessInstance startProcessFromNodeIds(String processId, Map<String, Object> params, String... nodeIds) {
+    public ProcessInstance startProcessFromNodeIds(KogitoProcessId processId, Map<String, Object> params, String... nodeIds) {
         return startProcessFromNodeIds(processId, null, params, nodeIds);
     }
 }

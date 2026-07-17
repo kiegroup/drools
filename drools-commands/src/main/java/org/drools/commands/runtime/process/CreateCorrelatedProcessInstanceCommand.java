@@ -31,6 +31,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.drools.commands.IdentifiableResult;
 import org.drools.commands.jaxb.JaxbMapAdapter;
 import org.kie.api.command.ExecutableCommand;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.Context;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.KieSession;
@@ -48,7 +49,7 @@ public class CreateCorrelatedProcessInstanceCommand implements ExecutableCommand
     private static final long serialVersionUID = -7810538827527530319L;
 
     @XmlAttribute(required = true)
-    private String processId;
+    private KogitoProcessId processId;
     
     @XmlElement(name = "correlation-key", required = true)
     @XmlJavaTypeAdapter(value = CorrelationKeyXmlAdapter.class)
@@ -66,33 +67,33 @@ public class CreateCorrelatedProcessInstanceCommand implements ExecutableCommand
     public CreateCorrelatedProcessInstanceCommand() {
     }
 
-    public CreateCorrelatedProcessInstanceCommand(String processId, CorrelationKey correlationKey) {
+    public CreateCorrelatedProcessInstanceCommand(KogitoProcessId processId, CorrelationKey correlationKey) {
         this.processId = processId;
         this.correlationKey = correlationKey;
     }
 
-    public CreateCorrelatedProcessInstanceCommand(String processId, CorrelationKey correlationKey, String outIdentifier) {
+    public CreateCorrelatedProcessInstanceCommand(KogitoProcessId processId, CorrelationKey correlationKey, String outIdentifier) {
         this(processId, correlationKey);
         this.outIdentifier = outIdentifier;
     }
 
-    public CreateCorrelatedProcessInstanceCommand(String processId, CorrelationKey correlationKey, 
+    public CreateCorrelatedProcessInstanceCommand(KogitoProcessId processId, CorrelationKey correlationKey, 
             Map<String, Object> parameters) {
         this(processId, correlationKey);
         this.parameters = parameters;
     }
 
-    public CreateCorrelatedProcessInstanceCommand(String processId, CorrelationKey correlationKey,
+    public CreateCorrelatedProcessInstanceCommand(KogitoProcessId processId, CorrelationKey correlationKey,
             Map<String, Object> parameters, String outIdentifier) {
         this(processId, correlationKey, outIdentifier);
         this.parameters = parameters;
     }
 
-    public String getProcessId() {
+    public KogitoProcessId getProcessId() {
         return processId;
     }
 
-    public void setProcessId(String processId) {
+    public void setProcessId(KogitoProcessId processId) {
         this.processId = processId;
     }
 

@@ -766,7 +766,7 @@ public class KnowledgePackageImpl
     private void removeProcess(Process process) {
         ProcessPackage rtp = (ProcessPackage) getResourceTypePackages().get(ResourceType.BPMN2);
         if (rtp != null) {
-            rtp.remove(process.getId());
+            rtp.remove(process.getId().id());
         }
     }
 

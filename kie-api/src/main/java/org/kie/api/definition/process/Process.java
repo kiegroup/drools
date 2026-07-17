@@ -21,6 +21,7 @@ package org.kie.api.definition.process;
 import java.util.Map;
 
 import org.kie.api.definition.KieDefinition;
+import org.kie.api.definition.KieDefinition.KnowledgeType;
 import org.kie.api.io.Resource;
 
 /**
@@ -29,15 +30,20 @@ import org.kie.api.io.Resource;
  *
  */
 public interface Process
-    extends
-    KieDefinition {
+     {
 
     /**
      * The unique id of the Process.
      *
      * @return the id
      */
-    String getId();
+    KogitoProcessId getId();
+    
+    default KnowledgeType getKnowledgeType() {
+    	return KnowledgeType.PROCESS;
+    }
+    
+    String getNamespace();
 
     /**
      * The name of the Process.
@@ -45,7 +51,8 @@ public interface Process
      * @return the name
      */
     String getName();
-
+    
+   
     /**
      * The version of the Process.
      * You may use your own versioning format

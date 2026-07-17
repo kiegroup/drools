@@ -20,6 +20,7 @@ package org.drools.commands.impl;
 
 import org.kie.api.command.Command;
 import org.kie.api.command.Setter;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.ObjectFilter;
 import org.kie.api.runtime.process.WorkItemHandler;
 import org.kie.api.runtime.rule.FactHandle;
@@ -157,12 +158,12 @@ public class FluentCommandFactoryServiceImpl {
         return this;
     }
 
-    public FluentCommandFactoryServiceImpl newStartProcess(String processId) {
+    public FluentCommandFactoryServiceImpl newStartProcess(KogitoProcessId processId) {
         commands.add( factory.newStartProcess( processId ) );
         return this;
     }
 
-    public FluentCommandFactoryServiceImpl newStartProcess(String processId, Map<String, Object> parameters) {
+    public FluentCommandFactoryServiceImpl newStartProcess(KogitoProcessId processId, Map<String, Object> parameters) {
         commands.add( factory.newStartProcess( processId, parameters ) );
         return this;
     }

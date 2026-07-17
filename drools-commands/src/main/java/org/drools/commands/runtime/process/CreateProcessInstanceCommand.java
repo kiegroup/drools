@@ -31,6 +31,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.drools.commands.IdentifiableResult;
 import org.drools.commands.jaxb.JaxbMapAdapter;
 import org.kie.api.command.ExecutableCommand;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.Context;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.KieSession;
@@ -41,7 +42,7 @@ import org.kie.internal.command.RegistryContext;
 public class CreateProcessInstanceCommand implements ExecutableCommand<ProcessInstance>, IdentifiableResult {
 
     @XmlAttribute(required = true)
-    private String processId;
+    private KogitoProcessId processId;
 
     @XmlJavaTypeAdapter(JaxbMapAdapter.class)
     @XmlElement(name="parameter")
@@ -55,30 +56,30 @@ public class CreateProcessInstanceCommand implements ExecutableCommand<ProcessIn
     public CreateProcessInstanceCommand() {
     }
 
-    public CreateProcessInstanceCommand(String processId) {
+    public CreateProcessInstanceCommand(KogitoProcessId processId) {
         this.processId = processId;
     }
 
-    public CreateProcessInstanceCommand(String processId, String outIdentifier) {
+    public CreateProcessInstanceCommand(KogitoProcessId processId, String outIdentifier) {
         this(processId);
         this.outIdentifier = outIdentifier;
     }
 
-    public CreateProcessInstanceCommand(String processId, Map<String, Object> parameters) {
+    public CreateProcessInstanceCommand(KogitoProcessId processId, Map<String, Object> parameters) {
         this(processId);
         this.parameters = parameters;
     }
 
-    public CreateProcessInstanceCommand(String processId, Map<String, Object> parameters, String outIdentifier) {
+    public CreateProcessInstanceCommand(KogitoProcessId processId, Map<String, Object> parameters, String outIdentifier) {
         this(processId, outIdentifier);
         this.parameters = parameters;
     }
 
-    public String getProcessId() {
+    public KogitoProcessId getProcessId() {
         return processId;
     }
 
-    public void setProcessId(String processId) {
+    public void setProcessId(KogitoProcessId processId) {
         this.processId = processId;
     }
 

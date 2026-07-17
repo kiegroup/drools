@@ -58,6 +58,7 @@ import org.drools.kiesession.rulebase.InternalKnowledgeBase;
 import org.drools.kiesession.session.StatefulKnowledgeSessionImpl;
 import org.kie.api.KieBase;
 import org.kie.api.command.Command;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.event.kiebase.KieBaseEventListener;
 import org.kie.api.event.process.ProcessEventListener;
 import org.kie.api.event.rule.AgendaEventListener;
@@ -238,7 +239,8 @@ public class StatefulKnowledgeSessionForRHS
         return delegate.getAgendaEventSupport();
     }
 
-    public ProcessInstance createProcessInstance(String processId, Map<String, Object> parameters) {
+    @Override
+    public ProcessInstance createProcessInstance(KogitoProcessId processId, Map<String, Object> parameters) {
         return delegate.createProcessInstance(processId, parameters);
     }
 
@@ -246,11 +248,7 @@ public class StatefulKnowledgeSessionForRHS
         return delegate.startProcessInstance(processInstanceId);
     }
 
-    public ProcessInstance createProcessInstance(String processId, CorrelationKey correlationKey,
-                                                 Map<String, Object> parameters) {
-        return delegate.createProcessInstance(processId, correlationKey, parameters);
-    }
-
+  
     public boolean equals(Object obj) {
         return delegate.equals(obj);
     }
@@ -263,10 +261,7 @@ public class StatefulKnowledgeSessionForRHS
         return delegate.hashCode();
     }
 
-    public ProcessInstance startProcess(String processId, CorrelationKey correlationKey,
-                                        Map<String, Object> parameters) {
-        return delegate.startProcess(processId, correlationKey, parameters);
-    }
+    
 
     public void registerChannel(String name, Channel channel) {
         delegate.registerChannel(name, channel);
@@ -731,19 +726,23 @@ public class StatefulKnowledgeSessionForRHS
         delegate.clearRuleFlowGroup(group);
     }
 
-    public ProcessInstance startProcess(String processId) {
+    @Override
+    public ProcessInstance startProcess(KogitoProcessId processId) {
         return delegate.startProcess(processId);
     }
 
-    public ProcessInstance startProcess(String processId, Map<String, Object> parameters) {
+    @Override
+    public ProcessInstance startProcess(KogitoProcessId processId, Map<String, Object> parameters) {
         return delegate.startProcess(processId, parameters);
     }
 
-    public ProcessInstance startProcess(String processId, AgendaFilter agendaFilter) {
+    @Override
+    public ProcessInstance startProcess(KogitoProcessId processId, AgendaFilter agendaFilter) {
         return delegate.startProcess(processId, agendaFilter);
     }
 
-    public ProcessInstance startProcess(String processId, Map<String, Object> parameters, AgendaFilter agendaFilter) {
+    @Override
+    public ProcessInstance startProcess(KogitoProcessId processId, Map<String, Object> parameters, AgendaFilter agendaFilter) {
         return delegate.startProcess(processId, parameters, agendaFilter);
     }
 
@@ -771,7 +770,8 @@ public class StatefulKnowledgeSessionForRHS
         return delegate.getSessionClock();
     }
 
-    public ProcessInstance startProcessFromNodeIds(String processId, Map<String, Object> params, String... nodeIds) {
+    @Override
+    public ProcessInstance startProcessFromNodeIds(KogitoProcessId processId, Map<String, Object> params, String... nodeIds) {
         return delegate.startProcessFromNodeIds(processId, params, nodeIds);
     }
-}
+	}

@@ -1142,7 +1142,7 @@ public class KnowledgeBaseImpl implements InternalRuleBase {
     }
 
     public void kBaseInternal_addProcess(Process process ) {
-        this.processes.put( process.getId(), process );
+        this.processes.put( process.getId().id(), process );
     }
 
     public void removeProcess( final String id ) {

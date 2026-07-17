@@ -21,6 +21,7 @@ package org.kie.api.runtime.process;
 import java.util.Collection;
 import java.util.Map;
 
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.rule.AgendaFilter;
 
 /**
@@ -37,7 +38,7 @@ public interface ProcessRuntime {
      * @param processId  The id of the process that should be started
      * @return the <code>ProcessInstance</code> that represents the instance of the process that was started
      */
-    ProcessInstance startProcess(String processId);
+    ProcessInstance startProcess(KogitoProcessId processId);
 
     /**
      * Start a new process instance.  The process (definition) that should
@@ -49,7 +50,7 @@ public interface ProcessRuntime {
      * @param parameters  the process variables that should be set when starting the process instance
      * @return the <code>ProcessInstance</code> that represents the instance of the process that was started
      */
-    ProcessInstance startProcess(String processId,
+    ProcessInstance startProcess(KogitoProcessId processId,
                                  Map<String, Object> parameters);
 
     /**
@@ -60,7 +61,7 @@ public interface ProcessRuntime {
      * @param agendaFilter filters the Matches that may fire
      * @return the <code>ProcessInstance</code> that represents the instance of the process that was started
      */
-    ProcessInstance startProcess( String processId,
+    ProcessInstance startProcess(KogitoProcessId processId,
                                   AgendaFilter agendaFilter );
 
     /**
@@ -74,7 +75,7 @@ public interface ProcessRuntime {
      * @param agendaFilter filters the Matches that may fire
      * @return the <code>ProcessInstance</code> that represents the instance of the process that was started
      */
-    ProcessInstance startProcess(String processId,
+    ProcessInstance startProcess(KogitoProcessId processId,
                                  Map<String, Object> parameters,
                                  AgendaFilter agendaFilter);
 
@@ -85,7 +86,7 @@ public interface ProcessRuntime {
      * @param nodeIds the node id list that should be triggered
      * @return the <code>ProcessInstance</code> that represents the instance of the process that was started
      */
-    ProcessInstance startProcessFromNodeIds(String processId, Map<String, Object> params, String... nodeIds);
+    ProcessInstance startProcessFromNodeIds(KogitoProcessId processId, Map<String, Object> params, String... nodeIds);
 
     /**
      * Creates a new process instance (but does not yet start it).  The process
@@ -99,7 +100,7 @@ public interface ProcessRuntime {
      * @param parameters  the process variables that should be set when creating the process instance
      * @return the <code>ProcessInstance</code> that represents the instance of the process that was created (but not yet started)
      */
-    ProcessInstance createProcessInstance(String processId,
+    ProcessInstance createProcessInstance(KogitoProcessId processId,
                                           Map<String, Object> parameters);
 
     /**

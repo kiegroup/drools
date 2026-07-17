@@ -25,6 +25,7 @@ import java.util.Map;
 import org.drools.base.rule.accessor.GlobalResolver;
 import org.drools.core.common.InternalFactHandle;
 import org.drools.core.common.ReteEvaluator;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.Environment;
 import org.kie.api.runtime.process.ProcessInstance;
 import org.kie.api.runtime.process.WorkItemManager;
@@ -181,12 +182,12 @@ public interface WorkingMemory extends ReteEvaluator, WorkingMemoryEventManager,
     /**
      * Starts a new process instance for the process with the given id.
      */
-    ProcessInstance startProcess(String processId);
+    ProcessInstance startProcess(KogitoProcessId processId);
 
     /**
      * Starts a new process instance for the process with the given id.
      */
-    ProcessInstance startProcess(String processId, Map<String, Object> parameters);
+    ProcessInstance startProcess(KogitoProcessId processId, Map<String, Object> parameters);
 
     /**
      * Returns the list of process instances of this working memory.

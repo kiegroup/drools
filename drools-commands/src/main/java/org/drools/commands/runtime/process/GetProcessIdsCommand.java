@@ -52,7 +52,7 @@ public class GetProcessIdsCommand
     public List<String> execute(Context context) {
     	List<String> result = new ArrayList<>();
         for (Process p: ((RegistryContext) context).lookup( KieSession.class ).getKieBase().getProcesses()) {
-        	result.add(p.getId());
+        	result.add(p.getId().id());
         }
 
         if ( this.outIdentifier != null ) {

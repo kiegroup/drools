@@ -26,6 +26,7 @@ import org.kie.api.command.BatchExecutionCommand;
 import org.kie.api.command.Command;
 import org.kie.api.command.KieCommands;
 import org.kie.api.command.Setter;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.internal.utils.KieService;
 import org.kie.api.runtime.ObjectFilter;
 import org.kie.api.runtime.process.WorkItemHandler;
@@ -273,7 +274,7 @@ public class CommandFactory {
      * @param processId
      * @return
      */
-    public static Command newStartProcess(String processId) {
+    public static Command newStartProcess(KogitoProcessId processId) {
         return getCommandFactoryProvider().newStartProcess( processId );
     }
 
@@ -284,7 +285,7 @@ public class CommandFactory {
      * @param parameters
      * @return
      */
-    public static Command newStartProcess(String processId,
+    public static Command newStartProcess(KogitoProcessId processId,
                                           Map<String, Object> parameters) {
         return getCommandFactoryProvider().newStartProcess( processId,
                                                             parameters );
