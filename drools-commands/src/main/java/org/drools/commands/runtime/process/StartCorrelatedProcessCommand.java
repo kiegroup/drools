@@ -51,7 +51,7 @@ public class StartCorrelatedProcessCommand implements ExecutableCommand<ProcessI
     private static final long serialVersionUID = 4032503589773486738L;
 
     @XmlAttribute(required = true)
-    private KogitoProcessId processId;
+    private String processId;
 
     @XmlElement(name = "correlation-key")
     @XmlJavaTypeAdapter(value = CorrelationKeyXmlAdapter.class)
@@ -69,33 +69,33 @@ public class StartCorrelatedProcessCommand implements ExecutableCommand<ProcessI
     public StartCorrelatedProcessCommand() {
     }
 
-    public StartCorrelatedProcessCommand(KogitoProcessId processId, CorrelationKey correlationKey) {
+    public StartCorrelatedProcessCommand(String processId, CorrelationKey correlationKey) {
         this.processId = processId;
         this.correlationKey = correlationKey;
     }
 
-    public StartCorrelatedProcessCommand(KogitoProcessId processId, CorrelationKey correlationKey, String outIdentifier) {
+    public StartCorrelatedProcessCommand(String processId, CorrelationKey correlationKey, String outIdentifier) {
         this(processId, correlationKey);
         this.outIdentifier = outIdentifier;
     }
 
-    public StartCorrelatedProcessCommand(KogitoProcessId processId, CorrelationKey correlationKey, 
+    public StartCorrelatedProcessCommand(String processId, CorrelationKey correlationKey, 
             Map<String, Object> parameters) {
         this(processId, correlationKey);
         this.parameters = parameters;
     }
 
-    public StartCorrelatedProcessCommand(KogitoProcessId processId, CorrelationKey correlationKey, 
+    public StartCorrelatedProcessCommand(String processId, CorrelationKey correlationKey, 
             Map<String, Object> parameters, String outIdentifier) {
         this(processId, correlationKey, outIdentifier);
         this.parameters = parameters;
     }
 
-    public KogitoProcessId getProcessId() {
+    public String getProcessId() {
         return processId;
     }
 
-    public void setProcessId(KogitoProcessId processId) {
+    public void setProcessId(String processId) {
         this.processId = processId;
     }
 
@@ -145,7 +145,7 @@ public class StartCorrelatedProcessCommand implements ExecutableCommand<ProcessI
                 ksession.insert(o);
             }
         }
-        ProcessInstance processInstance = ((CorrelationAwareProcessRuntime)ksession).startProcess(processId, correlationKey, parameters);
+        ProcessInstance processInstance = ((CorrelationAwareProcessRuntime)ksession).startProcess(new KogitoProcessId(processId), correlationKey, parameters);
         if ( this.outIdentifier != null ) {
             ((RegistryContext) context).lookup(ExecutionResults.class).setResult(this.outIdentifier, processInstance.getId());
         }

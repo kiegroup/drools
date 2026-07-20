@@ -279,7 +279,7 @@ public class CommandBasedStatefulKnowledgeSessionImpl extends AbstractRuntime
     @Override
     public ProcessInstance startProcess(KogitoProcessId processId, Map<String, Object> parameters, AgendaFilter agendaFilter) {
         StartProcessCommand command = new StartProcessCommand();
-        command.setProcessId( processId );
+        command.setProcessId( processId.id() );
         command.setParameters( parameters );
         command.setAgendaFilter( agendaFilter );
         return runner.execute( command );
@@ -288,7 +288,7 @@ public class CommandBasedStatefulKnowledgeSessionImpl extends AbstractRuntime
     public ProcessInstance createProcessInstance(KogitoProcessId processId,
 			                                     Map<String, Object> parameters) {
         CreateProcessInstanceCommand command = new CreateProcessInstanceCommand();
-        command.setProcessId( processId );
+        command.setProcessId( processId.id() );
         command.setParameters( parameters );
         return runner.execute( command );
 	}
@@ -585,7 +585,7 @@ public class CommandBasedStatefulKnowledgeSessionImpl extends AbstractRuntime
     public ProcessInstance startProcess(KogitoProcessId processId,
             CorrelationKey correlationKey, Map<String, Object> parameters) {
         
-        return this.runner.execute(new StartCorrelatedProcessCommand(processId, correlationKey, parameters));
+        return this.runner.execute(new StartCorrelatedProcessCommand(processId.id(), correlationKey, parameters));
     }
 
     @Override
@@ -593,7 +593,7 @@ public class CommandBasedStatefulKnowledgeSessionImpl extends AbstractRuntime
             CorrelationKey correlationKey, Map<String, Object> parameters) {
         
         return this.runner.execute(
-                new CreateCorrelatedProcessInstanceCommand(processId, correlationKey, parameters));
+                new CreateCorrelatedProcessInstanceCommand(processId.id(), correlationKey, parameters));
     }
 
     @Override
@@ -606,7 +606,7 @@ public class CommandBasedStatefulKnowledgeSessionImpl extends AbstractRuntime
     @Override
     public ProcessInstance startProcessFromNodeIds(KogitoProcessId processId, CorrelationKey key, Map<String, Object> params, String... nodeIds) {
         StartProcessFromNodeIdsCommand command = new StartProcessFromNodeIdsCommand();
-        command.setProcessId(processId);
+        command.setProcessId(processId.id());
         command.setParameters(params);
         command.setNodeIds(stream(nodeIds).collect(Collectors.toList()));
         command.setCorrelationKey(key);

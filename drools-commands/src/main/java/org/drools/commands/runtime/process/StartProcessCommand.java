@@ -46,7 +46,7 @@ import org.kie.internal.command.RegistryContext;
 public class StartProcessCommand implements ExecutableCommand<ProcessInstance>, IdentifiableResult {
 
     @XmlAttribute(required = true)
-    private KogitoProcessId processId;
+    private String processId;
 
     @XmlJavaTypeAdapter(JaxbMapAdapter.class)
     @XmlElement(name="parameter")
@@ -63,30 +63,30 @@ public class StartProcessCommand implements ExecutableCommand<ProcessInstance>, 
     public StartProcessCommand() {
     }
 
-    public StartProcessCommand(KogitoProcessId processId) {
+    public StartProcessCommand(String processId) {
         this.processId = processId;
     }
 
-    public StartProcessCommand(KogitoProcessId processId, String outIdentifier) {
+    public StartProcessCommand(String processId, String outIdentifier) {
         this(processId);
         this.outIdentifier = outIdentifier;
     }
 
-    public StartProcessCommand(KogitoProcessId processId, Map<String, Object> parameters) {
+    public StartProcessCommand(String processId, Map<String, Object> parameters) {
         this(processId);
         this.parameters = parameters;
     }
 
-    public StartProcessCommand(KogitoProcessId processId, Map<String, Object> parameters, String outIdentifier) {
+    public StartProcessCommand(String processId, Map<String, Object> parameters, String outIdentifier) {
         this(processId, outIdentifier);
         this.parameters = parameters;
     }
 
-    public KogitoProcessId getProcessId() {
+    public String getProcessId() {
         return processId;
     }
 
-    public void setProcessId(KogitoProcessId processId) {
+    public void setProcessId(String processId) {
         this.processId = processId;
     }
 
@@ -134,7 +134,7 @@ public class StartProcessCommand implements ExecutableCommand<ProcessInstance>, 
                 ksession.insert(o);
             }
         }
-        ProcessInstance processInstance = ksession.startProcess(processId, parameters, agendaFilter);
+        ProcessInstance processInstance = ksession.startProcess(new KogitoProcessId(processId), parameters, agendaFilter);
         if ( this.outIdentifier != null ) {
             ((RegistryContext) context).lookup(ExecutionResults.class).setResult(this.outIdentifier, processInstance.getId());
         }

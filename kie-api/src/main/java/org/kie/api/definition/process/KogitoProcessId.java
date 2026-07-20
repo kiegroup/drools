@@ -14,10 +14,6 @@ public record KogitoProcessId(String id, String version, Optional<Version> versi
         this(id, null);
     }
 
-    public static KogitoProcessId from(org.kie.api.definition.process.Process process) {
-        return process.getId();
-    }
-
     private static Optional<Version> parseVersion(String version) {
         try {
             return Optional.of(Version.parse(version));

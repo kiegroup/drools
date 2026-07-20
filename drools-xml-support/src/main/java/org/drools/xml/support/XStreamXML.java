@@ -75,7 +75,6 @@ import org.drools.commands.runtime.FlatQueryResults;
 import org.drools.base.base.ObjectType;
 import org.kie.api.command.Command;
 import org.kie.api.command.Setter;
-import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.rule.AgendaFilter;
 import org.kie.api.runtime.rule.FactHandle;
@@ -779,8 +778,7 @@ public class XStreamXML {
                             MarshallingContext context) {
             StartProcessCommand cmd = (StartProcessCommand) object;
             writer.addAttribute( "processId",
-                                 cmd.getProcessId().id() );
-            writer.addAttribute( "version", cmd.getProcessId().version());
+                                 cmd.getProcessId() );
             if ( cmd.getOutIdentifier() != null ) {
                 writer.addAttribute( "out-identifier",
                                      cmd.getOutIdentifier() );
@@ -800,7 +798,6 @@ public class XStreamXML {
         public Object unmarshal(HierarchicalStreamReader reader,
                                 UnmarshallingContext context) {
             String processId = reader.getAttribute( "processId" );
-            String version = reader.getAttribute("version");
             String outIdentifier = reader.getAttribute( "out-identifier" );
 
             HashMap<String, Object> params = new HashMap<>();
@@ -817,7 +814,7 @@ public class XStreamXML {
                 reader.moveUp();
             }
             StartProcessCommand cmd = new StartProcessCommand();
-            cmd.setProcessId( new  KogitoProcessId(processId, version) );
+            cmd.setProcessId( processId );
             cmd.setParameters( params );
             cmd.setOutIdentifier( outIdentifier );
 

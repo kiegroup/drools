@@ -85,6 +85,7 @@ import org.kie.api.KieBaseConfiguration;
 import org.kie.api.builder.ReleaseId;
 import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.definition.KiePackage;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.definition.process.Process;
 import org.kie.api.definition.rule.Query;
 import org.kie.api.definition.rule.Rule;
@@ -121,7 +122,7 @@ public class KnowledgeBaseImpl implements InternalRuleBase {
 
     protected Map<String, InternalKnowledgePackage> pkgs;
 
-    private Map<String, Process> processes;
+    private Map<KogitoProcessId, Process> processes;
 
     private transient ClassLoader rootClassLoader;
 
@@ -232,7 +233,7 @@ public class KnowledgeBaseImpl implements InternalRuleBase {
             }
         }
         //and now the rule flows
-        for ( String processName : new ArrayList<>(pkg.getRuleFlows().keySet()) ) {
+        for ( KogitoProcessId processName : new ArrayList<>(pkg.getRuleFlows().keySet()) ) {
             removeProcess( processName );
         }
         // removing the package itself from the list
@@ -448,7 +449,7 @@ public class KnowledgeBaseImpl implements InternalRuleBase {
 
             // add the flows to the RuleBase
             if ( newPkg.getRuleFlows() != null ) {
-                final Map<String, Process> flows = newPkg.getRuleFlows();
+                final Map<KogitoProcessId, Process> flows = newPkg.getRuleFlows();
                 for ( Process process : flows.values() ) {
                     kBaseInternal_addProcess( process );
                 }
@@ -1142,10 +1143,11 @@ public class KnowledgeBaseImpl implements InternalRuleBase {
     }
 
     public void kBaseInternal_addProcess(Process process ) {
-        this.processes.put( process.getId().id(), process );
+        this.processes.put( process.getProcessId(), process );
     }
 
-    public void removeProcess( final String id ) {
+    @Override
+    public void removeProcess( final KogitoProcessId id ) {
         Process process = this.processes.get( id );
         if ( process == null ) {
             throw new IllegalArgumentException( "Process '" + id + "' does not exist for this Rule Base." );
@@ -1153,12 +1155,12 @@ public class KnowledgeBaseImpl implements InternalRuleBase {
         kBaseInternal_removeProcess( id, process );
     }
 
-    public void kBaseInternal_removeProcess(String id, Process process) {
+    public void kBaseInternal_removeProcess(KogitoProcessId id, Process process) {
         this.processes.remove( id );
         this.pkgs.get( process.getPackageName() ).removeRuleFlow( id );
     }
 
-    public Process getProcess( final String id ) {
+    public Process getProcess( final KogitoProcessId id ) {
         readLock();
         try {
             return this.processes.get( id );

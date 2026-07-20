@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.definition.process.Process;
 import org.kie.api.internal.io.ResourceTypePackage;
 import org.kie.api.io.ResourceType;
@@ -46,9 +47,9 @@ public class ProcessPackage implements ResourceTypePackage<Process> {
         return rtp;
     }
 
-    private final Map<String, Process> ruleFlows = new HashMap<>();
+    private final Map<KogitoProcessId, Process> ruleFlows = new HashMap<>();
 
-    public Map<String, Process> getRuleFlows() {
+    public Map<KogitoProcessId, Process> getRuleFlows() {
         return this.ruleFlows;
     }
 
@@ -62,20 +63,20 @@ public class ProcessPackage implements ResourceTypePackage<Process> {
         return ResourceType.BPMN2;
     }
 
-    public Process lookup(String id) {
+    public Process lookup(KogitoProcessId id) {
         return ruleFlows.get(id);
     }
 
     @Override
     public void add(Process processedResource) {
-        this.ruleFlows.put(processedResource.getId().id(), processedResource);
+        this.ruleFlows.put(processedResource.getProcessId(), processedResource);
     }
 
     public Iterator<Process> iterator() {
         return getRuleFlows().values().iterator();
     }
 
-    public void remove(String id) {
+    public void remove(KogitoProcessId id) {
         ruleFlows.remove(id);
     }
 }

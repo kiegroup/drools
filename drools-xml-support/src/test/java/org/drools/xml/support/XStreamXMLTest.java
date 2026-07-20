@@ -46,7 +46,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.drools.commands.runtime.ExecutionResultImpl;
 import org.drools.commands.runtime.FlatQueryResults;
-import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.rule.FactHandle;
 import org.kie.api.runtime.rule.QueryResults;
 
@@ -65,7 +64,7 @@ public class XStreamXMLTest {
 
     @Test
     public void testMarshallStartProcessCmd() {
-        StartProcessCommand cmd = new StartProcessCommand(new KogitoProcessId("some-process-id", "1.0.0"), "some-out-identifier");
+        StartProcessCommand cmd = new StartProcessCommand("some-process-id", "some-out-identifier");
         String xmlString = xstream.toXML(cmd);
         assertThat(xmlString.contains("processId=\"some-process-id\"")).isTrue();
         assertThat(xmlString.contains("out-identifier=\"some-out-identifier\"")).isTrue();
@@ -74,7 +73,7 @@ public class XStreamXMLTest {
     @Test
     public void testMarshallStartProcessCmdWithNoOutIdentifier() {
         // the "out-identifier" is optional -> the marshalling should succeed even if it is null
-        StartProcessCommand cmd = new StartProcessCommand(new KogitoProcessId("some-process-id", "1.0.0"));
+        StartProcessCommand cmd = new StartProcessCommand("some-process-id");
         String xmlString = xstream.toXML(cmd);
         assertThat(xmlString.contains("processId=\"some-process-id\"")).isTrue();
     }

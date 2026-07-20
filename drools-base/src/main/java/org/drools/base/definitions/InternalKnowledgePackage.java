@@ -40,6 +40,7 @@ import org.drools.base.rule.accessor.ReadAccessor;
 import org.drools.base.ruleunit.RuleUnitDescriptionLoader;
 import org.drools.util.TypeResolver;
 import org.kie.api.definition.KiePackage;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.definition.process.Process;
 import org.kie.api.definition.type.FactType;
 import org.kie.api.io.Resource;
@@ -67,7 +68,7 @@ public interface InternalKnowledgePackage extends KiePackage,
     Map<String, Type> getGlobals();
 
     @Deprecated
-    Map<String, Process> getRuleFlows();
+    Map<KogitoProcessId, Process> getRuleFlows();
 
     Map<String, TypeDeclaration> getTypeDeclarations();
 
@@ -109,7 +110,7 @@ public interface InternalKnowledgePackage extends KiePackage,
     void removeFunction(String functionName);
 
     @Deprecated
-    void removeRuleFlow(String id);
+    void removeRuleFlow(KogitoProcessId id);
 
     void removeRule(RuleImpl rule);
 

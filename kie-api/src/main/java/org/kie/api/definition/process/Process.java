@@ -29,7 +29,7 @@ import org.kie.api.io.Resource;
  * a process engine.  Different types of processes may exist.
  *
  */
-public interface Process
+public interface Process extends KieDefinition
      {
 
     /**
@@ -37,14 +37,8 @@ public interface Process
      *
      * @return the id
      */
-    KogitoProcessId getId();
+    KogitoProcessId getProcessId();
     
-    default KnowledgeType getKnowledgeType() {
-    	return KnowledgeType.PROCESS;
-    }
-    
-    String getNamespace();
-
     /**
      * The name of the Process.
      *

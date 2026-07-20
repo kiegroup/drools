@@ -47,6 +47,7 @@ import org.drools.core.rule.accessor.FactHandleFactory;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.builder.ReleaseId;
 import org.kie.api.definition.KiePackage;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.definition.process.Process;
 import org.kie.api.definition.rule.Query;
 import org.kie.api.definition.rule.Rule;
@@ -70,10 +71,10 @@ public interface InternalRuleBase extends RuleBase {
 
     FactType getFactType( String packageName, String typeName );
 
-    Process getProcess( String processId );
+    Process getProcess( KogitoProcessId processId );
     Collection<Process> getProcesses();
     void addProcess( Process process );
-    void removeProcess( String processId );
+    void removeProcess( KogitoProcessId processId );
 
     Set<String> getEntryPointIds();
 

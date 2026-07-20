@@ -42,7 +42,7 @@ import org.kie.internal.command.RegistryContext;
 public class CreateProcessInstanceCommand implements ExecutableCommand<ProcessInstance>, IdentifiableResult {
 
     @XmlAttribute(required = true)
-    private KogitoProcessId processId;
+    private String processId;
 
     @XmlJavaTypeAdapter(JaxbMapAdapter.class)
     @XmlElement(name="parameter")
@@ -56,30 +56,30 @@ public class CreateProcessInstanceCommand implements ExecutableCommand<ProcessIn
     public CreateProcessInstanceCommand() {
     }
 
-    public CreateProcessInstanceCommand(KogitoProcessId processId) {
+    public CreateProcessInstanceCommand(String processId) {
         this.processId = processId;
     }
 
-    public CreateProcessInstanceCommand(KogitoProcessId processId, String outIdentifier) {
+    public CreateProcessInstanceCommand(String processId, String outIdentifier) {
         this(processId);
         this.outIdentifier = outIdentifier;
     }
 
-    public CreateProcessInstanceCommand(KogitoProcessId processId, Map<String, Object> parameters) {
+    public CreateProcessInstanceCommand(String processId, Map<String, Object> parameters) {
         this(processId);
         this.parameters = parameters;
     }
 
-    public CreateProcessInstanceCommand(KogitoProcessId processId, Map<String, Object> parameters, String outIdentifier) {
+    public CreateProcessInstanceCommand(String processId, Map<String, Object> parameters, String outIdentifier) {
         this(processId, outIdentifier);
         this.parameters = parameters;
     }
 
-    public KogitoProcessId getProcessId() {
+    public String getProcessId() {
         return processId;
     }
 
-    public void setProcessId(KogitoProcessId processId) {
+    public void setProcessId(String processId) {
         this.processId = processId;
     }
 
@@ -123,7 +123,7 @@ public class CreateProcessInstanceCommand implements ExecutableCommand<ProcessIn
                 ksession.insert(o);
             }
         }
-        ProcessInstance processInstance = ksession.createProcessInstance(processId, parameters);
+        ProcessInstance processInstance = ksession.createProcessInstance(new KogitoProcessId(processId), parameters);
         if ( this.outIdentifier != null ) {
             ((RegistryContext) context).lookup(ExecutionResults.class).setResult(this.outIdentifier, processInstance.getId());
         }

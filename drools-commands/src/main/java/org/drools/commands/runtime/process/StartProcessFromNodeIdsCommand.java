@@ -56,17 +56,17 @@ public class StartProcessFromNodeIdsCommand extends StartProcessCommand implemen
     }
 
 
-    public StartProcessFromNodeIdsCommand(KogitoProcessId processId, String outIdentifier) {
+    public StartProcessFromNodeIdsCommand(String processId, String outIdentifier) {
         super(processId);
         setOutIdentifier(outIdentifier);
     }
 
-    public StartProcessFromNodeIdsCommand(KogitoProcessId processId, Map<String, Object> parameters) {
+    public StartProcessFromNodeIdsCommand(String processId, Map<String, Object> parameters) {
         super(processId);
         setParameters(parameters);
     }
 
-    public StartProcessFromNodeIdsCommand(KogitoProcessId processId, Map<String, Object> parameters, String outIdentifier) {
+    public StartProcessFromNodeIdsCommand(String processId, Map<String, Object> parameters, String outIdentifier) {
         this(processId, outIdentifier);
         setParameters(parameters);
     }
@@ -101,9 +101,9 @@ public class StartProcessFromNodeIdsCommand extends StartProcessCommand implemen
 
         ProcessInstance processInstance = null;
         if (correlationKey == null) {
-            processInstance = ksession.startProcessFromNodeIds(getProcessId(), getParameters(), ids);
+            processInstance = ksession.startProcessFromNodeIds(new KogitoProcessId(getProcessId()), getParameters(), ids);
         } else {
-            processInstance = ((CorrelationAwareProcessRuntime) ksession).startProcessFromNodeIds(getProcessId(), correlationKey, getParameters(), ids);
+            processInstance = ((CorrelationAwareProcessRuntime) ksession).startProcessFromNodeIds(new KogitoProcessId(getProcessId()), correlationKey, getParameters(), ids);
         }
         if ( getOutIdentifier() != null ) {
             ((RegistryContext) context).lookup(ExecutionResults.class).setResult(getOutIdentifier(), processInstance.getId());

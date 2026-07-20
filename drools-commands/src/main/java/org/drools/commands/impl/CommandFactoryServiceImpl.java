@@ -62,7 +62,6 @@ import org.drools.commands.runtime.ExecutionResultImpl;
 import org.kie.api.command.BatchExecutionCommand;
 import org.kie.api.command.Command;
 import org.kie.api.command.Setter;
-import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.ObjectFilter;
 import org.kie.api.runtime.process.WorkItemHandler;
@@ -216,13 +215,13 @@ public class CommandFactoryServiceImpl implements ExtendedKieCommands {
         return new GetFactHandleInEntryPointCommand( object, entryPoint );
     }
 
-    public Command newStartProcess(KogitoProcessId processId) {
+    public Command newStartProcess(String processId) {
         StartProcessCommand startProcess = new StartProcessCommand();
         startProcess.setProcessId(processId);
         return startProcess;
     }
 
-    public Command newStartProcess(KogitoProcessId processId,
+    public Command newStartProcess(String processId,
             Map<String, Object> parameters) {
         StartProcessCommand startProcess = new StartProcessCommand();
         startProcess.setProcessId(processId);
