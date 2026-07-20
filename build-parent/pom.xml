@@ -71,7 +71,7 @@
     <version.guru.nidi>0.18.0</version.guru.nidi>
     <version.info.picocli>4.7.7</version.info.picocli>
     <version.io.micrometer>1.14.12</version.io.micrometer>
-    <version.io.quarkus>3.27.4</version.io.quarkus>
+    <version.io.quarkus>3.27.4.1</version.io.quarkus>
     <version.io.netty>4.1.136.Final</version.io.netty>
     <version.io.smallrye.openapi.core>4.0.12</version.io.smallrye.openapi.core>
     <version.io.smallrye.config.core>3.13.4</version.io.smallrye.config.core>
@@ -222,7 +222,7 @@
     <version.archunit.maven.plugin>4.0.2</version.archunit.maven.plugin>
     <version.archunit.junit5>1.4.0</version.archunit.junit5>
 
-    <version.io.vertx>4.5.27</version.io.vertx>
+    <version.io.vertx>4.5.28</version.io.vertx>
     <version.org.codehaus.plexus.plexus-utils>3.6.1</version.org.codehaus.plexus.plexus-utils>
   </properties>
 
