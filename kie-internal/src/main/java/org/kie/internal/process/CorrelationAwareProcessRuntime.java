@@ -20,6 +20,7 @@ package org.kie.internal.process;
 
 import java.util.Map;
 
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.process.ProcessInstance;
 
 /**
@@ -40,7 +41,7 @@ public interface CorrelationAwareProcessRuntime {
      * @param parameters  the process variables that should be set when starting the process instance
      * @return the <code>ProcessInstance</code> that represents the instance of the process that was started
      */
-    ProcessInstance startProcess(String processId, CorrelationKey correlationKey,
+    ProcessInstance startProcess(KogitoProcessId processId, CorrelationKey correlationKey,
                                  Map<String, Object> parameters);
 
     /**
@@ -56,7 +57,7 @@ public interface CorrelationAwareProcessRuntime {
      * @param parameters  the process variables that should be set when creating the process instance
      * @return the <code>ProcessInstance</code> that represents the instance of the process that was created (but not yet started)
      */
-    ProcessInstance createProcessInstance(String processId, CorrelationKey correlationKey,
+    ProcessInstance createProcessInstance(KogitoProcessId processId, CorrelationKey correlationKey,
                                           Map<String, Object> parameters);
 
     /**
@@ -71,7 +72,7 @@ public interface CorrelationAwareProcessRuntime {
      * @throws DeploymentNotFoundException in case deployment with given deployment id does not exist
      * @throws DeploymentNotActiveException in case deployment with given deployment id is not active
      */
-    ProcessInstance startProcessFromNodeIds(String processId, CorrelationKey key, Map<String, Object> params, String... nodeIds);
+    ProcessInstance startProcessFromNodeIds(KogitoProcessId processId, CorrelationKey key, Map<String, Object> params, String... nodeIds);
 
     /**
      * Returns the process instance with the given correlationKey.  Note that only active process instances

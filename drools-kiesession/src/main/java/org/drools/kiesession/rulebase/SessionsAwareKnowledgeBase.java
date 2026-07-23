@@ -51,6 +51,7 @@ import org.drools.core.rule.accessor.FactHandleFactory;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.builder.ReleaseId;
 import org.kie.api.definition.KiePackage;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.definition.process.Process;
 import org.kie.api.definition.rule.Query;
 import org.kie.api.definition.rule.Rule;
@@ -718,7 +719,7 @@ public class SessionsAwareKnowledgeBase implements InternalKnowledgeBase {
 
 
     @Override
-    public void removeProcess( final String id ) {
+    public void removeProcess( final KogitoProcessId id ) {
         enqueueModification( () -> {
             Process process = getProcess( id );
             if ( process == null ) {
@@ -731,7 +732,7 @@ public class SessionsAwareKnowledgeBase implements InternalKnowledgeBase {
     }
 
     @Override
-    public Process getProcess(String id) {
+    public Process getProcess(KogitoProcessId id) {
         return delegate.getProcess(id);
     }
 

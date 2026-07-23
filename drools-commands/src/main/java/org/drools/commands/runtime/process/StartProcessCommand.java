@@ -33,6 +33,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.drools.commands.IdentifiableResult;
 import org.drools.commands.jaxb.JaxbMapAdapter;
 import org.kie.api.command.ExecutableCommand;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.Context;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.KieSession;
@@ -133,7 +134,7 @@ public class StartProcessCommand implements ExecutableCommand<ProcessInstance>, 
                 ksession.insert(o);
             }
         }
-        ProcessInstance processInstance = ksession.startProcess(processId, parameters, agendaFilter);
+        ProcessInstance processInstance = ksession.startProcess(new KogitoProcessId(processId), parameters, agendaFilter);
         if ( this.outIdentifier != null ) {
             ((RegistryContext) context).lookup(ExecutionResults.class).setResult(this.outIdentifier, processInstance.getId());
         }

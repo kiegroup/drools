@@ -92,6 +92,7 @@ import org.kie.api.KieBase;
 import org.kie.api.command.BatchExecutionCommand;
 import org.kie.api.command.Command;
 import org.kie.api.conf.MBeansOption;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.event.KieRuntimeEventManager;
 import org.kie.api.event.kiebase.KieBaseEventListener;
 import org.kie.api.event.process.ProcessEventListener;
@@ -1389,24 +1390,29 @@ public class StatefulKnowledgeSessionImpl extends AbstractRuntime
         return this.lock;
     }
 
-    public ProcessInstance startProcess(String processId) {
+    @Override
+    public ProcessInstance startProcess(KogitoProcessId processId) {
         return getProcessRuntime().startProcess( processId );
     }
 
-    public ProcessInstance startProcess(String processId,
+    @Override
+    public ProcessInstance startProcess(KogitoProcessId processId,
                                         Map<String, Object> parameters) {
         return getProcessRuntime().startProcess( processId, parameters );
     }
 
-    public ProcessInstance startProcess(String processId, AgendaFilter agendaFilter) {
+    @Override
+    public ProcessInstance startProcess(KogitoProcessId processId, AgendaFilter agendaFilter) {
         return getProcessRuntime().startProcess( processId, agendaFilter );
     }
 
-    public ProcessInstance startProcess(String processId, Map<String, Object> parameters, AgendaFilter agendaFilter) {
+    @Override
+    public ProcessInstance startProcess(KogitoProcessId processId, Map<String, Object> parameters, AgendaFilter agendaFilter) {
         return getProcessRuntime().startProcess( processId, parameters, agendaFilter );
     }
 
-    public ProcessInstance createProcessInstance(String processId,
+    @Override
+    public ProcessInstance createProcessInstance(KogitoProcessId processId,
                                                  Map<String, Object> parameters) {
         return getProcessRuntime().createProcessInstance( processId, parameters );
     }
@@ -1424,14 +1430,14 @@ public class StatefulKnowledgeSessionImpl extends AbstractRuntime
     }
 
     @Override
-    public ProcessInstance startProcess(String processId,
+    public ProcessInstance startProcess(KogitoProcessId processId,
                                         CorrelationKey correlationKey, Map<String, Object> parameters) {
 
         return getProcessRuntime().startProcess( processId, correlationKey, parameters );
     }
 
     @Override
-    public ProcessInstance createProcessInstance(String processId,
+    public ProcessInstance createProcessInstance(KogitoProcessId processId,
                                                  CorrelationKey correlationKey, Map<String, Object> parameters) {
 
         return getProcessRuntime().createProcessInstance( processId, correlationKey, parameters );
@@ -1675,12 +1681,12 @@ public class StatefulKnowledgeSessionImpl extends AbstractRuntime
         }
 
         @Override
-        public ProcessInstance startProcess( String processId, CorrelationKey correlationKey, Map<String, Object> parameters ) {
+        public ProcessInstance startProcess( KogitoProcessId processId, CorrelationKey correlationKey, Map<String, Object> parameters ) {
             throw new UnsupportedOperationException( );
         }
 
         @Override
-        public ProcessInstance createProcessInstance( String processId, CorrelationKey correlationKey, Map<String, Object> parameters ) {
+        public ProcessInstance createProcessInstance( KogitoProcessId processId, CorrelationKey correlationKey, Map<String, Object> parameters ) {
             throw new UnsupportedOperationException( );
         }
 
@@ -1705,27 +1711,27 @@ public class StatefulKnowledgeSessionImpl extends AbstractRuntime
         }
 
         @Override
-        public ProcessInstance startProcess( String processId ) {
+        public ProcessInstance startProcess( KogitoProcessId processId ) {
             throw new UnsupportedOperationException( );
         }
 
         @Override
-        public ProcessInstance startProcess( String processId, Map<String, Object> parameters ) {
+        public ProcessInstance startProcess( KogitoProcessId processId, Map<String, Object> parameters ) {
             throw new UnsupportedOperationException( );
         }
 
         @Override
-        public ProcessInstance startProcess( String processId, AgendaFilter agendaFilter ) {
+        public ProcessInstance startProcess( KogitoProcessId processId, AgendaFilter agendaFilter ) {
             throw new UnsupportedOperationException( );
         }
 
         @Override
-        public ProcessInstance startProcess( String processId, Map<String, Object> parameters, AgendaFilter agendaFilter ) {
+        public ProcessInstance startProcess( KogitoProcessId processId, Map<String, Object> parameters, AgendaFilter agendaFilter ) {
             throw new UnsupportedOperationException( );
         }
 
         @Override
-        public ProcessInstance createProcessInstance( String processId, Map<String, Object> parameters ) {
+        public ProcessInstance createProcessInstance( KogitoProcessId processId, Map<String, Object> parameters ) {
             throw new UnsupportedOperationException( );
         }
 
@@ -1770,23 +1776,23 @@ public class StatefulKnowledgeSessionImpl extends AbstractRuntime
         }
 
         @Override
-        public ProcessInstance startProcessFromNodeIds(String processId, Map<String, Object> params, String... nodeInstancesIds) {
+        public ProcessInstance startProcessFromNodeIds(KogitoProcessId processId, Map<String, Object> params, String... nodeInstancesIds) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public ProcessInstance startProcessFromNodeIds(String processId, CorrelationKey key, Map<String, Object> params, String... nodeIds) {
+        public ProcessInstance startProcessFromNodeIds(KogitoProcessId processId, CorrelationKey key, Map<String, Object> params, String... nodeIds) {
             throw new UnsupportedOperationException();
         }
     }
 
     @Override
-    public ProcessInstance startProcessFromNodeIds(String processId, Map<String, Object> params, String... nodeInstancesIds) {
+    public ProcessInstance startProcessFromNodeIds(KogitoProcessId processId, Map<String, Object> params, String... nodeInstancesIds) {
         return getProcessRuntime().startProcessFromNodeIds(processId, params, nodeInstancesIds);
     }
 
     @Override
-    public ProcessInstance startProcessFromNodeIds(String processId, CorrelationKey key, Map<String, Object> params, String... nodeIds) {
+    public ProcessInstance startProcessFromNodeIds(KogitoProcessId processId, CorrelationKey key, Map<String, Object> params, String... nodeIds) {
         return getProcessRuntime().startProcessFromNodeIds(processId, key, params, nodeIds);
     }
 }

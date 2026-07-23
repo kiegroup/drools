@@ -60,6 +60,7 @@ import org.drools.util.ClassTypeResolver;
 import org.drools.util.ClassUtils;
 import org.drools.util.TypeResolver;
 import org.drools.wiring.api.classloader.ProjectClassLoader;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.definition.process.Process;
 import org.kie.api.definition.rule.Global;
 import org.kie.api.definition.rule.Query;
@@ -483,7 +484,7 @@ public class KnowledgePackageImpl
      * Get the rule flows for this package. The key is the ruleflow id. It will
      * be Collections.EMPTY_MAP if none have been added.
      */
-    public Map<String, Process> getRuleFlows() {
+    public Map<KogitoProcessId, Process> getRuleFlows() {
         ProcessPackage rtp = (ProcessPackage) getResourceTypePackages().get(ResourceType.BPMN2);
         return rtp == null? Collections.emptyMap() : rtp.getRuleFlows();
     }
@@ -491,7 +492,7 @@ public class KnowledgePackageImpl
     /**
      * Rule flows can be removed by ID.
      */
-    public void removeRuleFlow(String id) {
+    public void removeRuleFlow(KogitoProcessId id) {
         ProcessPackage rtp = (ProcessPackage) getResourceTypePackages().get(ResourceType.BPMN2);
         if (rtp == null || rtp.lookup(id) == null) {
             throw new IllegalArgumentException("The rule flow with id [" + id + "] is not part of this package.");
@@ -766,7 +767,7 @@ public class KnowledgePackageImpl
     private void removeProcess(Process process) {
         ProcessPackage rtp = (ProcessPackage) getResourceTypePackages().get(ResourceType.BPMN2);
         if (rtp != null) {
-            rtp.remove(process.getId());
+            rtp.remove(process.getProcessId());
         }
     }
 

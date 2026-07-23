@@ -18,6 +18,8 @@
  */
 package org.kie.api.runtime.process;
 
+import org.kie.api.definition.process.KogitoProcessId;
+
 public class ProcessWorkItemHandlerException extends RuntimeException {
 
     private static final long serialVersionUID = 328927887939759492L;
@@ -27,23 +29,23 @@ public class ProcessWorkItemHandlerException extends RuntimeException {
         RETRY, COMPLETE, ABORT, RETHROW
     }
 
-    private String processId;
+    private KogitoProcessId processId;
     private HandlingStrategy strategy;
     private int retries;
 
-    public ProcessWorkItemHandlerException(String processId, String strategy, Throwable cause) {        
+    public ProcessWorkItemHandlerException(KogitoProcessId processId, String strategy, Throwable cause) {        
         this(processId, HandlingStrategy.valueOf(strategy), cause, MAX_NUMBER_OF_RETRIES);
     }
 
-    public ProcessWorkItemHandlerException(String processId, String strategy, Throwable cause, int retries) {
+    public ProcessWorkItemHandlerException(KogitoProcessId processId, String strategy, Throwable cause, int retries) {
         this(processId, HandlingStrategy.valueOf(strategy), cause, retries);
     }
 
-    public ProcessWorkItemHandlerException(String processId, HandlingStrategy strategy, Throwable cause) {
+    public ProcessWorkItemHandlerException(KogitoProcessId processId, HandlingStrategy strategy, Throwable cause) {
         this(processId, strategy, cause, MAX_NUMBER_OF_RETRIES);
     }
 
-    public ProcessWorkItemHandlerException(String processId, HandlingStrategy strategy, Throwable cause, int retries) {
+    public ProcessWorkItemHandlerException(KogitoProcessId processId, HandlingStrategy strategy, Throwable cause, int retries) {
         super(cause);
         this.processId = processId;
         this.strategy = strategy;
@@ -56,7 +58,7 @@ public class ProcessWorkItemHandlerException extends RuntimeException {
         }
     }
 
-    public String getProcessId() {
+    public KogitoProcessId getProcessId() {
         return processId;
     }
 

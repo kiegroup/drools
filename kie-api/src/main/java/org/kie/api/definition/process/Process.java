@@ -21,6 +21,7 @@ package org.kie.api.definition.process;
 import java.util.Map;
 
 import org.kie.api.definition.KieDefinition;
+import org.kie.api.definition.KieDefinition.KnowledgeType;
 import org.kie.api.io.Resource;
 
 /**
@@ -28,24 +29,26 @@ import org.kie.api.io.Resource;
  * a process engine.  Different types of processes may exist.
  *
  */
-public interface Process
-    extends
-    KieDefinition {
+public interface Process extends KieDefinition
+     {
 
     /**
      * The unique id of the Process.
      *
      * @return the id
      */
-    String getId();
-
+    default KogitoProcessId getProcessId() {
+    	return new KogitoProcessId(getId(), getVersion());
+    }
+    
     /**
      * The name of the Process.
      *
      * @return the name
      */
     String getName();
-
+    
+   
     /**
      * The version of the Process.
      * You may use your own versioning format

@@ -27,6 +27,7 @@ import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.runtime.Context;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.KieSession;
@@ -100,9 +101,9 @@ public class StartProcessFromNodeIdsCommand extends StartProcessCommand implemen
 
         ProcessInstance processInstance = null;
         if (correlationKey == null) {
-            processInstance = ksession.startProcessFromNodeIds(getProcessId(), getParameters(), ids);
+            processInstance = ksession.startProcessFromNodeIds(new KogitoProcessId(getProcessId()), getParameters(), ids);
         } else {
-            processInstance = ((CorrelationAwareProcessRuntime) ksession).startProcessFromNodeIds(getProcessId(), correlationKey, getParameters(), ids);
+            processInstance = ((CorrelationAwareProcessRuntime) ksession).startProcessFromNodeIds(new KogitoProcessId(getProcessId()), correlationKey, getParameters(), ids);
         }
         if ( getOutIdentifier() != null ) {
             ((RegistryContext) context).lookup(ExecutionResults.class).setResult(getOutIdentifier(), processInstance.getId());

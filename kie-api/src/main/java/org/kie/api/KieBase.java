@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.kie.api.definition.KiePackage;
+import org.kie.api.definition.process.KogitoProcessId;
 import org.kie.api.definition.process.Process;
 import org.kie.api.definition.rule.Query;
 import org.kie.api.definition.rule.Rule;
@@ -131,14 +132,14 @@ public interface KieBase extends KieBaseEventManager {
      *
      * @return the {@link Process} identified by the given processId or null if process not found.
      */
-    Process getProcess( String processId );
+    Process getProcess( KogitoProcessId processId );
 
     /**
      * Removes a process.
      *
      * @param processId the id of the process
      */
-    void removeProcess( String processId );
+    void removeProcess( KogitoProcessId processId );
 
     /**
      * Returns a collection of the {@link Process}es that exist in this {@link KieBase}.
