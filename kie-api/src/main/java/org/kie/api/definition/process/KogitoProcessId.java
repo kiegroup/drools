@@ -13,6 +13,16 @@ public record KogitoProcessId(String id, String version, Optional<Version> versi
     public KogitoProcessId(String id) {
         this(id, null);
     }
+    
+    @Override
+    public boolean equals(Object o) {
+    	return o instanceof KogitoProcessId id && compareTo(id) == 0;
+    }
+    
+    @Override
+    public int hashCode() {
+    	return id.hashCode();
+    }
 
     private static Optional<Version> parseVersion(String version) {
         try {

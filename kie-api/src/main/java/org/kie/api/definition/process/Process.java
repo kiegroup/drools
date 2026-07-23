@@ -37,7 +37,9 @@ public interface Process extends KieDefinition
      *
      * @return the id
      */
-    KogitoProcessId getProcessId();
+    default KogitoProcessId getProcessId() {
+    	return new KogitoProcessId(getId(), getVersion());
+    }
     
     /**
      * The name of the Process.
