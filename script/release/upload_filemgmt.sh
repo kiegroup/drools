@@ -47,12 +47,6 @@ echo "-mkdir ${droolsDocs}/${kieVersion}/kie-api-javadoc" > create_kie_api_javad
 chmod +x create_kie_api_javadoc_dir
 sftp -b create_kie_api_javadoc_dir $filemgmtServer
 
-# creates directory drools-docs on filemgmt-prod.jboss.org
-touch create_drools_docs_dir
-echo "-mkdir ${droolsDocs}/${kieVersion}/drools-docs" > create_drools_docs_dir
-chmod +x create_drools_docs_dir
-sftp -b create_drools_docs_dir $filemgmtServer
-
 # upload binaries to filemgmt-prod.jboss.org
 touch upload_binaries
 echo "put drools-distribution/target/drools-distribution-${kieVersion}.zip ${droolsHtdocs}/${kieVersion}" > upload_binaries
@@ -61,7 +55,6 @@ sftp -b upload_binaries $filemgmtServer
 
 # upload docs to filemgmt-prod.jboss.org
 readonly remote_shell="ssh -p 2222"
-rsync -Pavqr -e "$remote_shell" --protocol=28 --delete-after drools-docs/target/drools-docs-${kieVersion}/* ${rsync_filemgmt}:${droolsDocs}/${kieVersion}/drools-docs
 rsync -Pavqr -e "$remote_shell" --protocol=28 --delete-after kie-api/target/apidocs/* ${rsync_filemgmt}:${droolsDocs}/${kieVersion}/kie-api-javadoc
 
 
