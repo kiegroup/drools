@@ -72,8 +72,8 @@
     <version.com.thoughtworks.xstream>1.4.21</version.com.thoughtworks.xstream>
     <version.guru.nidi>0.18.0</version.guru.nidi>
     <version.info.picocli>4.7.7</version.info.picocli>
-    <version.io.micrometer>1.16.3</version.io.micrometer>
-    <version.io.quarkus>3.33.2.1</version.io.quarkus>
+    <version.io.micrometer>1.16.6</version.io.micrometer>
+    <version.io.quarkus>3.33.3</version.io.quarkus>
     <version.io.netty>4.1.136.Final</version.io.netty>
     <version.io.smallrye.openapi.core>4.2.4</version.io.smallrye.openapi.core>
     <version.io.smallrye.config.core>3.16.0</version.io.smallrye.config.core>
@@ -190,7 +190,7 @@
 
     <version.net.byte-buddy>1.17.8</version.net.byte-buddy>
 
-    <version.org.postgresql>42.7.12</version.org.postgresql>
+    <version.org.postgresql>42.7.13</version.org.postgresql>
 
     <version.ch.obermuhlner>2.0.1</version.ch.obermuhlner>
     <version.io.smallrye.jandex>3.5.3</version.io.smallrye.jandex>
@@ -224,14 +224,14 @@
     <version.archunit.maven.plugin>4.0.2</version.archunit.maven.plugin>
     <version.archunit.junit5>1.4.0</version.archunit.junit5>
 
-    <version.io.vertx>4.5.28</version.io.vertx>
+    <version.io.vertx>4.5.31</version.io.vertx>
     <version.org.codehaus.plexus.plexus-utils>3.6.1</version.org.codehaus.plexus.plexus-utils>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <!-- Version overrides to fix vulnerabilities. -->
-      <!-- Override vertx-core version from Quarkus 3.33 BOM (CVE fix) -->
+      <!-- Override vertx-core version from Quarkus 3.33.3 BOM (CVE fix) -->
       <dependency>
         <groupId>io.vertx</groupId>
         <artifactId>vertx-core</artifactId>
