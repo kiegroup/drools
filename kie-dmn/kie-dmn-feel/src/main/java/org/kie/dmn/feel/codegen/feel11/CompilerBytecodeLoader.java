@@ -29,7 +29,7 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.comments.JavadocComment;
+import com.github.javaparser.ast.comments.TraditionalJavadocComment;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.NullLiteralExpr;
@@ -164,7 +164,7 @@ public class CompilerBytecodeLoader {
         MethodDeclaration applyMethodDEclaration = cu
                 .findFirst(MethodDeclaration.class)
                 .orElseThrow(() -> new RuntimeException("Something unexpected changed in the template."));
-        applyMethodDEclaration.setComment(new JavadocComment("   FEEL: " + feelExpression + "   "));
+        applyMethodDEclaration.setComment(new TraditionalJavadocComment("   FEEL: " + feelExpression + "   "));
     }
 
     private MethodDeclaration getCreateBaseNodeMethodDeclaration(CompilationUnit cu) {

@@ -40,8 +40,9 @@ import com.github.javaparser.ast.body.ReceiverParameter;
 import com.github.javaparser.ast.body.RecordDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.comments.BlockComment;
-import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.ast.comments.LineComment;
+import com.github.javaparser.ast.comments.MarkdownComment;
+import com.github.javaparser.ast.comments.TraditionalJavadocComment;
 import com.github.javaparser.ast.expr.ArrayAccessExpr;
 import com.github.javaparser.ast.expr.ArrayCreationExpr;
 import com.github.javaparser.ast.expr.ArrayInitializerExpr;
@@ -68,6 +69,7 @@ import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.NormalAnnotationExpr;
 import com.github.javaparser.ast.expr.NullLiteralExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import com.github.javaparser.ast.expr.MatchAllPatternExpr;
 import com.github.javaparser.ast.expr.RecordPatternExpr;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.expr.SingleMemberAnnotationExpr;
@@ -251,7 +253,12 @@ public interface DrlGenericVisitor<R, A> extends GenericVisitor<R,A> {
     }
 
     @Override
-    default R visit(JavadocComment n, A arg) {
+    default R visit(TraditionalJavadocComment n, A arg) {
+        return defaultMethod(n, arg);
+    }
+
+    @Override
+    default R visit(MarkdownComment n, A arg) {
         return defaultMethod(n, arg);
     }
 
@@ -686,6 +693,11 @@ public interface DrlGenericVisitor<R, A> extends GenericVisitor<R,A> {
 
     @Override
     default R visit(RecordPatternExpr n, A arg) {
+        return defaultMethod(n, arg);
+    }
+
+    @Override
+    default R visit(MatchAllPatternExpr n, A arg) {
         return defaultMethod(n, arg);
     }
 }

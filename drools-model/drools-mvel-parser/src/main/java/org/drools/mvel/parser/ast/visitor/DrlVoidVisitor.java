@@ -39,8 +39,9 @@ import com.github.javaparser.ast.body.ReceiverParameter;
 import com.github.javaparser.ast.body.RecordDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.comments.BlockComment;
-import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.ast.comments.LineComment;
+import com.github.javaparser.ast.comments.MarkdownComment;
+import com.github.javaparser.ast.comments.TraditionalJavadocComment;
 import com.github.javaparser.ast.expr.ArrayAccessExpr;
 import com.github.javaparser.ast.expr.ArrayCreationExpr;
 import com.github.javaparser.ast.expr.ArrayInitializerExpr;
@@ -67,6 +68,7 @@ import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.NormalAnnotationExpr;
 import com.github.javaparser.ast.expr.NullLiteralExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import com.github.javaparser.ast.expr.MatchAllPatternExpr;
 import com.github.javaparser.ast.expr.RecordPatternExpr;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.expr.SingleMemberAnnotationExpr;
@@ -385,7 +387,12 @@ public interface DrlVoidVisitor<A> extends VoidVisitor<A> {
     }
 
     @Override
-    default void visit(JavadocComment n, A arg) {
+    default void visit(TraditionalJavadocComment n, A arg) {
+
+    }
+
+    @Override
+    default void visit(MarkdownComment n, A arg) {
 
     }
 
@@ -675,5 +682,9 @@ public interface DrlVoidVisitor<A> extends VoidVisitor<A> {
 
     @Override
     default void visit(RecordPatternExpr n, A arg) {
+    }
+
+    @Override
+    default void visit(MatchAllPatternExpr n, A arg) {
     }
 }
