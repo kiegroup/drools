@@ -224,23 +224,14 @@
     <version.archunit.maven.plugin>4.0.2</version.archunit.maven.plugin>
     <version.archunit.junit5>1.4.0</version.archunit.junit5>
 
-    <version.io.vertx>4.5.31</version.io.vertx>
     <version.org.codehaus.plexus.plexus-utils>3.6.1</version.org.codehaus.plexus.plexus-utils>
   </properties>
 
   <dependencyManagement>
     <dependencies>
-      <!-- Version overrides to fix vulnerabilities. -->
-      <!-- Override vertx-core version from Quarkus 3.33.3 BOM (CVE fix) -->
-      <dependency>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-core</artifactId>
-        <version>${version.io.vertx}</version>
-      </dependency>
       <dependency>
         <groupId>io.vertx</groupId>
         <artifactId>vertx-web</artifactId>
-        <version>${version.io.vertx}</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.plexus</groupId>
