@@ -125,7 +125,7 @@
     <version.org.jpmml.model>1.6.4</version.org.jpmml.model> <!-- jpmml-model BSD 3C license - ATTENTION 1.5.1 intentional, because 1.5.1 evaluators works with 1.5.1 -->
     <version.org.junit.jupiter>6.0.3</version.org.junit.jupiter>
     <version.org.junit.platform>6.0.3</version.org.junit.platform> <!-- JUnit 6 uses a unified version across all modules -->
-    <version.org.mvel>2.5.2.Final</version.org.mvel>
+    <version.org.mvel>2.5.4.Final</version.org.mvel>
     <version.org.powermock>2.0.9</version.org.powermock>
     <version.org.slf4j>2.0.17</version.org.slf4j>
     <!-- simple-jndi is a small library that helps us avoid JNDI error messages during testing -->
