@@ -146,11 +146,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.asciidoctor</groupId>
-      <artifactId>asciidoctorj</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
@@ -161,13 +156,6 @@
     <testResources>
       <testResource> <!-- as I will be including additional testResource directory, I need to re-explicit the default to Maven (standard Maven behaviour) -->
           <directory>${project.basedir}/src/test/resources</directory>
-      </testResource>
-      <testResource>
-        <directory>${project.basedir}/</directory>
-        <includes>
-          <include>ref-dmn-feel-builtin-functions.adoc</include>
-        </includes>
-        <filtering>false</filtering>
       </testResource>
     </testResources>
     <plugins>
