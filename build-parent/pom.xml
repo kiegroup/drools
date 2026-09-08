@@ -55,8 +55,6 @@
     -->
     <version.ch.qos.logback>1.5.35</version.ch.qos.logback>
     <version.commons-codec>1.21.0</version.commons-codec>
-    <version.commons-collections>3.2.2</version.commons-collections>
-    <version.commons-logging>1.1.1</version.commons-logging>
     <version.commons-io>2.21.0</version.commons-io>
     <version.common-text>1.14.0</version.common-text>
     <version.com.fasterxml.jackson>2.21.5</version.com.fasterxml.jackson>
@@ -85,14 +83,14 @@
     <version.antlr>2.7.7</version.antlr>
     <version.org.antlr>3.5.2</version.org.antlr>
     <version.org.antlr.ST4>4.0.7</version.org.antlr.ST4>
-    <version.org.apache.ant>1.10.11</version.org.apache.ant>
+    <version.org.apache.ant>1.10.17</version.org.apache.ant>
     <version.org.apache.commons.lang3>3.20.0</version.org.apache.commons.lang3>
     <version.org.apache.commons.math3>3.6.1</version.org.apache.commons.math3>
     <version.org.apache.httpcomponents.httpcore>4.4.16</version.org.apache.httpcomponents.httpcore>
     <version.org.apache.maven>3.9.11</version.org.apache.maven>
     <version.org.apache.maven.resolver>1.7.3</version.org.apache.maven.resolver>
     <version.org.apache.maven.wagon>3.5.3</version.org.apache.maven.wagon>
-    <version.org.apache.pdfbox>2.0.28</version.org.apache.pdfbox>
+    <version.org.apache.pdfbox>2.0.37</version.org.apache.pdfbox>
     <version.org.apache.poi>5.4.1</version.org.apache.poi>
     <version.org.apache.tomcat.tomcat-dbcp>10.1.48</version.org.apache.tomcat.tomcat-dbcp>
     <version.org.assertj>3.27.7</version.org.assertj>
@@ -104,7 +102,7 @@
     <version.org.hsqldb>2.7.1</version.org.hsqldb>
     <version.org.infinispan>15.0.21.Final</version.org.infinispan>
     <version.org.infinispan.protostream>5.0.13.Final</version.org.infinispan.protostream>
-    <version.org.javassist>3.26.0-GA</version.org.javassist>
+    <version.org.javassist>3.33.0-GA</version.org.javassist>
     <version.org.jboss.narayana.tomcat>7.2.2.Final</version.org.jboss.narayana.tomcat>
     <version.org.jboss.logging>3.6.1.Final</version.org.jboss.logging>
     <version.org.jboss.transaction.spi>8.0.0.Final</version.org.jboss.transaction.spi>
@@ -126,12 +124,9 @@
     <version.org.junit.jupiter>6.0.3</version.org.junit.jupiter>
     <version.org.junit.platform>6.0.3</version.org.junit.platform> <!-- JUnit 6 uses a unified version across all modules -->
     <version.org.mvel>2.5.4.Final</version.org.mvel>
-    <version.org.powermock>2.0.9</version.org.powermock>
     <version.org.slf4j>2.0.17</version.org.slf4j>
     <!-- simple-jndi is a small library that helps us avoid JNDI error messages during testing -->
     <version.simple-jndi>0.11.4.1</version.simple-jndi>
-    <version.xerces>2.12.2</version.xerces>
-    <version.com.squareup.okhttp3>4.9.2</version.com.squareup.okhttp3>
 
     <!-- External dependency versions bom -->
     <!-- ################################################################################ -->
@@ -139,13 +134,9 @@
     <!-- ################################################################################ -->
 
     <version.org.antlr4>4.13.2</version.org.antlr4>
-    <version.org.jboss.arquillian.selenium>3.13.0</version.org.jboss.arquillian.selenium>
     <version.io.swagger.core.v3>2.2.38</version.io.swagger.core.v3>
-    <version.io.swagger.parser.v3>2.1.34</version.io.swagger.parser.v3>
     <version.org.xmlunit>2.10.4</version.org.xmlunit>
     <!-- therefore the property is rewritten in that repository parent -->
-    <version.org.asciidoctor.asciidoctorj>2.2.0</version.org.asciidoctor.asciidoctorj>
-    <version.org.asciidoctor.asciidoctorj-pdf>1.5.0</version.org.asciidoctor.asciidoctorj-pdf>
     <version.org.w3c.dom>2.3.0-jaxb-1.0.6</version.org.w3c.dom>
     <version.org.mockito>5.21.0</version.org.mockito>
     <!-- Version of JMH -->
@@ -252,11 +243,6 @@
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
         <version>${version.commons-codec}</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-collections</groupId>
-        <artifactId>commons-collections</artifactId>
-        <version>${version.commons-collections}</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
@@ -482,12 +468,6 @@
         <groupId>com.h2database</groupId>
         <artifactId>h2</artifactId>
         <version>${version.com.h2database}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.squareup.okhttp3</groupId>
-        <artifactId>okhttp</artifactId>
-        <version>${version.com.squareup.okhttp3}</version>
       </dependency>
 
       <dependency>
@@ -885,18 +865,6 @@
       </dependency>
 
       <dependency>
-        <groupId>org.asciidoctor</groupId>
-        <artifactId>asciidoctorj</artifactId>
-        <version>${version.org.asciidoctor.asciidoctorj}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-
-      <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
         <version>${version.org.assertj}</version>
@@ -983,26 +951,6 @@
         <version>${version.org.mvel}</version>
       </dependency>
 
-      <dependency>
-        <groupId>org.powermock</groupId>
-        <artifactId>powermock-api-mockito2</artifactId>
-        <version>${version.org.powermock}</version>
-        <exclusions>
-          <!-- mockito-all is ugly uberjar. Users of powermock need to depend on on mockito-core explicitly.
-     Once we upgrade powermock to version that contains https://github.com/jayway/powermock/pull/596, this
-     exclude can be removed, as wel as explit dependencies on mockito-core. -->
-          <exclusion>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.powermock</groupId>
-        <artifactId>powermock-module-junit4</artifactId>
-        <version>${version.org.powermock}</version>
-      </dependency>
-
       <!-- Keep in sync with groupId ch.qos.logback -->
       <dependency>
         <groupId>org.slf4j</groupId>
@@ -1046,12 +994,6 @@
         </exclusions>
       </dependency>
 
-      <dependency>
-        <groupId>xerces</groupId>
-        <artifactId>xercesImpl</artifactId>
-        <version>${version.xerces}</version>
-      </dependency>
-
       <!--JMH (Benchmarks)-->
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
@@ -1084,22 +1026,6 @@
         <groupId>io.swagger.core.v3</groupId>
         <artifactId>swagger-annotations</artifactId>
         <version>${version.io.swagger.core.v3}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.swagger.parser.v3</groupId>
-        <artifactId>swagger-parser</artifactId>
-        <version>${version.io.swagger.parser.v3}</version>
-        <scope>test</scope>
-        <exclusions><!-- banned for kie-server tests: -->
-          <exclusion>
-            <groupId>javax.mail</groupId>
-            <artifactId>mailapi</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-          </exclusion>
-        </exclusions>
       </dependency>
 
       <dependency>
@@ -1851,23 +1777,6 @@
           <groupId>io.smallrye</groupId>
           <artifactId>jandex-maven-plugin</artifactId>
           <version>${version.io.smallrye.jandex}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.asciidoctor</groupId>
-          <artifactId>asciidoctor-maven-plugin</artifactId>
-          <version>2.0.0-RC.1</version>
-          <dependencies>
-            <dependency>
-              <groupId>org.asciidoctor</groupId>
-              <artifactId>asciidoctorj</artifactId>
-              <version>${version.org.asciidoctor.asciidoctorj}</version>
-            </dependency>
-            <dependency>
-              <groupId>org.asciidoctor</groupId>
-              <artifactId>asciidoctorj-pdf</artifactId>
-              <version>${version.org.asciidoctor.asciidoctorj-pdf}</version>
-            </dependency>
-          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
