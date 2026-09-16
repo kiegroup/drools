@@ -99,8 +99,8 @@
     <!--This needs to be in sync with JUnit-->
     <version.org.hamcrest>2.2</version.org.hamcrest>
     <version.org.hsqldb>2.7.4</version.org.hsqldb>
-    <version.org.infinispan>16.0.13</version.org.infinispan>
-    <version.org.infinispan.protostream>6.0.7</version.org.infinispan.protostream>
+    <version.org.infinispan>16.0.15</version.org.infinispan>
+    <version.org.infinispan.protostream>6.0.11</version.org.infinispan.protostream>
     <version.org.javassist>3.33.0-GA</version.org.javassist>
     <version.org.jboss.narayana.tomcat>7.3.3.Final</version.org.jboss.narayana.tomcat>
     <version.org.jboss.logging>3.6.2.Final</version.org.jboss.logging>
