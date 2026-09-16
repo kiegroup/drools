@@ -38,7 +38,7 @@ import org.drools.reliability.core.StorageManagerFactory;
 import org.drools.reliability.core.TestableStorageManager;
 import org.drools.reliability.infinispan.InfinispanStorageManager;
 import org.infinispan.client.hotrod.RemoteCacheManager;
-import org.infinispan.server.test.core.InfinispanContainer;
+import org.infinispan.testcontainers.InfinispanContainer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -148,7 +148,7 @@ public abstract class ReliabilityTestBasics {
             container.start();
             LOG.info("InfinispanContainer started"); // takes about 10 seconds
             InfinispanStorageManager cacheManager = (InfinispanStorageManager) StorageManagerFactory.get().getStorageManager();
-            RemoteCacheManager remoteCacheManager = container.getRemoteCacheManager(cacheManager.provideAdditionalRemoteConfigurationBuilder());
+            RemoteCacheManager remoteCacheManager = createRemoteCacheManager(cacheManager);
             cacheManager.setRemoteCacheManager(remoteCacheManager);
         }
     }
@@ -178,12 +178,18 @@ public abstract class ReliabilityTestBasics {
             StorageManagerFactory.get().getStorageManager().close(); // close remoteCacheManager
             // Reclaim RemoteCacheManager
             InfinispanStorageManager cacheManager = (InfinispanStorageManager) StorageManagerFactory.get().getStorageManager();
-            RemoteCacheManager remoteCacheManager = container.getRemoteCacheManager(cacheManager.provideAdditionalRemoteConfigurationBuilder());
+            RemoteCacheManager remoteCacheManager = createRemoteCacheManager(cacheManager);
             cacheManager.setRemoteCacheManager(remoteCacheManager);
         } else {
             ((TestableStorageManager) StorageManagerFactory.get().getStorageManager()).restart(); // restart embedded infinispan cacheManager. GlobalState and FireStore are kept
         }
         ReliableRuntimeComponentFactoryImpl.refreshCounterUsingStorage();
+    }
+
+    private RemoteCacheManager createRemoteCacheManager(InfinispanStorageManager cacheManager) {
+        return new RemoteCacheManager(cacheManager.provideAdditionalRemoteConfigurationBuilder()
+                                              .uri(container.getConnectionURI())
+                                              .build());
     }
 
     protected FactHandle insert(Object obj) {
