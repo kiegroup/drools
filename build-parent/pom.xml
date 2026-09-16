@@ -212,13 +212,17 @@
     <version.archunit.junit5>1.4.2</version.archunit.junit5>
 
     <version.org.codehaus.plexus.plexus-utils>3.6.1</version.org.codehaus.plexus.plexus-utils>
+
+    <!-- Security version overrides for transitive dependencies. -->
+    <version.log4j.api>2.25.5</version.log4j.api>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-web</artifactId>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>${version.log4j.api}</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.plexus</groupId>
