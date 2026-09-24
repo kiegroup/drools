@@ -23,7 +23,7 @@ jobs:
         job_name: [ kogito-runtimes, kogito-apps, serverless-workflow-examples ]
         os: [ubuntu-latest]
         java-version: [17]
-        maven-version: ['3.9.11']
+        maven-version: ['3.9.16']
         include:
           - job_name: kogito-runtimes
             repository: kogito-runtimes
