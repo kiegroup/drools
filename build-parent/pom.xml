@@ -69,9 +69,9 @@
     <version.com.thoughtworks.xstream>1.4.21</version.com.thoughtworks.xstream>
     <version.guru.nidi>0.18.1</version.guru.nidi>
     <version.info.picocli>4.7.7</version.info.picocli>
-    <version.io.micrometer>1.16.6</version.io.micrometer>
-    <version.io.quarkus>3.33.3.2</version.io.quarkus>
-    <version.io.netty>4.1.138.Final</version.io.netty>
+    <version.io.micrometer>1.16.7</version.io.micrometer>
+    <version.io.quarkus>3.33.4</version.io.quarkus>
+    <version.io.netty>4.1.139.Final</version.io.netty>
     <version.io.smallrye.openapi.core>4.2.4</version.io.smallrye.openapi.core>
     <version.io.smallrye.config.core>3.16.0</version.io.smallrye.config.core>
     <version.org.apache.kafka>4.1.2</version.org.apache.kafka>
@@ -100,7 +100,7 @@
     <version.org.hamcrest>2.2</version.org.hamcrest>
     <version.org.hsqldb>2.7.4</version.org.hsqldb>
     <version.org.infinispan>16.0.15</version.org.infinispan>
-    <version.org.infinispan.protostream>6.0.11</version.org.infinispan.protostream>
+    <version.org.infinispan.protostream>6.0.12</version.org.infinispan.protostream>
     <version.org.javassist>3.33.0-GA</version.org.javassist>
     <version.org.jboss.narayana.tomcat>7.3.3.Final</version.org.jboss.narayana.tomcat>
     <version.org.jboss.logging>3.6.2.Final</version.org.jboss.logging>
