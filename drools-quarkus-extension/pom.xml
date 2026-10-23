@@ -45,7 +45,7 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>com.redhat.quarkus.platform</groupId>
+        <groupId>io.quarkus</groupId>
         <artifactId>quarkus-bom</artifactId>
         <version>${version.io.quarkus}</version>
         <type>pom</type>
