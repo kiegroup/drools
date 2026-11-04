@@ -57,8 +57,8 @@
     <version.commons-logging>1.1.1</version.commons-logging>
     <version.commons-io>2.20.0</version.commons-io>
     <version.common-text>1.14.0</version.common-text>
-    <version.com.fasterxml.jackson>2.21.1</version.com.fasterxml.jackson>
-    <version.com.fasterxml.jackson.databind>2.21.1</version.com.fasterxml.jackson.databind>
+    <version.com.fasterxml.jackson>2.21.8</version.com.fasterxml.jackson>
+    <version.com.fasterxml.jackson.databind>2.21.8</version.com.fasterxml.jackson.databind>
     <version.com.fasterxml.jackson.annotations>2.21</version.com.fasterxml.jackson.annotations>
     <version.com.github.victools>4.37.0</version.com.github.victools> <!-- victools should align with Jackson if possible -->
     <version.com.miglayout>3.7.4</version.com.miglayout>
@@ -71,8 +71,8 @@
     <version.guru.nidi>0.18.0</version.guru.nidi>
     <version.info.picocli>4.7.7</version.info.picocli>
     <version.io.micrometer>1.14.12</version.io.micrometer>
-    <version.io.quarkus>3.27.3</version.io.quarkus>
-    <version.io.netty>4.1.132.Final</version.io.netty>
+    <version.io.quarkus>3.27.6.1</version.io.quarkus>
+    <version.io.netty>4.1.139.Final</version.io.netty>
     <version.io.smallrye.openapi.core>4.0.12</version.io.smallrye.openapi.core>
     <version.io.smallrye.config.core>3.13.4</version.io.smallrye.config.core>
     <version.org.apache.kafka>4.1.2</version.org.apache.kafka>
@@ -123,7 +123,7 @@
     <version.org.jpmml.model>1.6.4</version.org.jpmml.model> <!-- jpmml-model BSD 3C license - ATTENTION 1.5.1 intentional, because 1.5.1 evaluators works with 1.5.1 -->
     <version.org.junit.jupiter>5.13.4</version.org.junit.jupiter>
     <version.org.junit.platform>1.13.4</version.org.junit.platform> <!-- Keep synchronized with junit-jupiter (middle and minor should be the same) -->
-    <version.org.mvel>2.5.2.Final</version.org.mvel>
+    <version.org.mvel>2.5.4.Final</version.org.mvel>
     <version.org.powermock>2.0.9</version.org.powermock>
     <version.org.slf4j>2.0.17</version.org.slf4j>
     <!-- simple-jndi is a small library that helps us avoid JNDI error messages during testing -->
@@ -189,7 +189,7 @@
 
     <version.net.byte-buddy>1.17.6</version.net.byte-buddy>
 
-    <version.org.postgresql>42.7.8</version.org.postgresql>
+    <version.org.postgresql>42.7.13</version.org.postgresql>
 
     <version.ch.obermuhlner>2.0.1</version.ch.obermuhlner>
     <version.io.smallrye.jandex>3.4.0</version.io.smallrye.jandex>
@@ -197,7 +197,7 @@
 
     <version.com.github.javaparser>3.27.0</version.com.github.javaparser>
 
-    <version.com.google.guava>33.4.8-jre</version.com.google.guava>
+    <version.com.google.guava>33.5.0.jre-redhat-00002</version.com.google.guava>
 
     <!-- JaCoCo coverage data file location -->
     <!--suppress UnresolvedMavenProperty -->
@@ -219,14 +219,14 @@
     <version.archunit.maven.plugin>4.0.2</version.archunit.maven.plugin>
     <version.archunit.junit5>1.4.0</version.archunit.junit5>
 
-    <version.io.vertx>4.5.25</version.io.vertx>
+    <version.io.vertx>4.5.34</version.io.vertx>
     <version.org.codehaus.plexus.plexus-utils>3.6.1</version.org.codehaus.plexus.plexus-utils>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <!-- Version overrides to fix vulnerabilities. -->
-      <!-- Override vertx-core version from Quarkus 3.27.2 BOM (CVE fix) -->
+      <!-- Override vertx-core version from Quarkus 3.27.6.1 BOM (CVE fix) -->
       <dependency>
         <groupId>io.vertx</groupId>
         <artifactId>vertx-core</artifactId>
