@@ -186,7 +186,7 @@
 
     <version.com.github.javaparser>3.28.0</version.com.github.javaparser>
 
-    <version.com.google.guava>33.5.0.jre-redhat-00002</version.com.google.guava>
+    <version.com.google.guava>33.8.0-jre</version.com.google.guava>
 
     <!-- JaCoCo coverage data file location -->
     <!--suppress UnresolvedMavenProperty -->
